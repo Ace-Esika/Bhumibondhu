@@ -57,6 +57,12 @@ class Settings(BaseSettings):
     # Set to an empty string to disable.
     exclude_title_regex: str = r"(?i)^\s*test\b"
 
+    # --- prebuilt index (seed) ---
+    # When the database is empty on worker start, import this file instead of indexing from
+    # scratch (see app/ingestion/seed.py). Relative paths resolve from the working directory.
+    index_seed_path: str = "seed/bhumipedia-index.tar.gz"
+    index_seed_auto_import: bool = True
+
     # --- sync scheduler --------------------------------------------------------------
     sync_enabled: bool = True
     sync_interval_hours: float = 6.0

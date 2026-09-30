@@ -23,6 +23,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 COPY alembic.ini ./
 COPY app ./app
 COPY evaluation ./evaluation
+# Prebuilt index: the worker imports it into an empty database instead of re-indexing.
+COPY seed ./seed
 
 RUN useradd --system --uid 10001 --home /app appuser && mkdir -p /models && chown -R appuser /models /app
 USER appuser

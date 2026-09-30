@@ -37,9 +37,12 @@ cp .env.example .env
 docker compose up -d --build        # postgres, redis, migrate (one-shot), api, worker
 ```
 
-On its first start the **worker** runs a full sync and then embeds every chunk. On CPU this
-takes 1–3 hours for the current corpus of about 5.9k chunks (see §9). Later syncs are
-incremental and take about a minute. Follow progress with:
+**No re-indexing on a fresh clone or server.** The repo ships a prebuilt index,
+`seed/bhumipedia-index.tar.gz` (about 37 MB: every source record, document and embedded
+chunk). When the worker starts against an **empty** database it imports that file in about
+15 seconds. The regular sync then only processes records that changed on Bhumipedia since
+the seed was built. Without a seed, the first start would fetch and embed everything, which
+takes 1–3 hours on CPU. See [§3a](#3a-prebuilt-index-seed). Follow progress with:
 
 ```bash
 docker compose logs -f worker
@@ -147,6 +150,41 @@ curl localhost:8000/api/admin/ingestion-status -H "X-Admin-API-Key: $KEY"
 
 The API only *queues* runs. The worker executes them, so ingestion never runs inside a web
 process.
+
+---
+
+## 3a. Prebuilt index (seed)
+
+| Situation | What happens |
+|---|---|
+| Fresh clone or new server (empty DB) | The worker imports `seed/bhumipedia-index.tar.gz` (~15 s), then syncs only upstream changes. **Nothing is re-embedded.** |
+| Existing deployment (DB volume present) | The seed is ignored; normal incremental sync runs. |
+| Seed missing or incompatible | Full sync and embedding, as without a seed. The reason is logged. |
+
+```bash
+python -m app.cli export-index               # refresh seed/bhumipedia-index.tar.gz from the current DB
+python -m app.cli import-index               # manual import into an empty DB (--force replaces an index)
+```
+
+* **Format.** A tar of `COPY` dumps for `sources`, `documents` and `document_chunks` (with
+  vectors), plus `manifest.json`. The manifest records the pipeline version, chunking
+  signature, embedding model and dimension, row counts and a sha256 per member. It needs no
+  `pg_dump` and doesn't depend on the PostgreSQL major version. Conversations and run
+  history are never exported.
+* **Safety.** Import refuses a non-empty database (unless `--force`), a corrupted file
+  (checksum), a different vector dimension, or a different embedding model. If the code
+  version or chunking differs, it warns: the next sync reprocesses, but chunks with
+  unchanged text keep their vectors.
+* **Keeping it fresh.** Refresh the seed whenever you change processing code
+  (`PIPELINE_VERSION`) or chunking settings, and occasionally to pick up new Bhumipedia
+  content (`sync` → `export-index` → commit). `tests/unit/test_seed_file.py` fails if the
+  committed seed no longer matches the code.
+* **Size in git.** The seed is about 37 MB, under GitHub's 50 MB warning, but every refresh
+  adds another copy to the history. If you refresh often, track it with Git LFS
+  (`git lfs track "seed/*.tar.gz"`) or attach it to a GitHub Release and set
+  `INDEX_SEED_PATH` to the downloaded file.
+* **Model weights (4.3 GB) are not in git.** They download once per machine into the
+  `model_cache` volume; the model is still needed to embed users' questions.
 
 ---
 
@@ -319,6 +357,7 @@ The most important ones:
 | `CHUNK_TARGET_TOKENS` / `_MAX_` / `_OVERLAP_` | 500 / 700 / 80 | changing these reprocesses on the next sync |
 | `SYNC_INTERVAL_HOURS` | 6 | worker schedule; state lives in `ingestion_runs` |
 | `REDIS_URL` | – | response and query-embedding cache plus shared rate limits |
+| `INDEX_SEED_PATH` / `INDEX_SEED_AUTO_IMPORT` | `seed/bhumipedia-index.tar.gz` / true | prebuilt index imported into an empty DB |
 | `GROQ_MAX_TOKENS` / `_DETAILED` | 2048 / 4096 | output budget (gpt-oss spends part on hidden reasoning) |
 | `GROQ_FALLBACK_MODEL` | – | answers when the primary model is rate limited |
 | `LLM_MAX_INPUT_TOKENS` / `LLM_MAX_TOTAL_TOKENS` | 0 / 0 | set 6000 / 7800 on Groq free tier |

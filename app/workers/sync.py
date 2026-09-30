@@ -19,6 +19,7 @@ from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import select
 
+from app.core.cache import bump_corpus_version
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.db.database import dispose_engine, get_sessionmaker
@@ -29,6 +30,7 @@ from app.ingestion.runner import (
     enqueue_run,
     execute_run,
     recover_stale_runs,
+    sync_lock,
 )
 from app.rag.memory import SQLConversationStore
 
@@ -44,8 +46,34 @@ async def schedule_due(interval_hours: float) -> bool:
     return last is None or datetime.now(UTC) - last >= timedelta(hours=interval_hours)
 
 
+async def bootstrap_from_seed() -> None:
+    """Empty database + seed file present → import the prebuilt index (once, under the lock)."""
+    from pathlib import Path
+
+    from app.ingestion.seed import SeedError, database_is_empty, import_index
+
+    s = get_settings()
+    seed = Path(s.index_seed_path)
+    if not s.index_seed_auto_import or not seed.is_file():
+        return
+    try:
+        async with sync_lock():
+            if not await asyncio.to_thread(database_is_empty, s):
+                return
+            log.info("empty database: importing prebuilt index", extra={"seed": str(seed)})
+            report = await asyncio.to_thread(import_index, seed, s)
+            await bump_corpus_version()
+            log.info("prebuilt index imported", extra={"rows": report.rows, "seconds": round(report.seconds, 1),
+                                                       "warnings": report.warnings})
+    except SyncAlreadyRunning:
+        log.info("another worker holds the sync lock; skipping seed import")
+    except SeedError as e:
+        log.error("seed import refused; falling back to a full sync", extra={"error": str(e)})
+
+
 async def worker_loop(stop: asyncio.Event) -> None:
     s = get_settings()
+    await bootstrap_from_seed()
     try:
         if n := await recover_stale_runs():
             log.warning("recovered stale runs", extra={"count": n})

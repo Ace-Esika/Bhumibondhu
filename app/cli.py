@@ -10,6 +10,8 @@
     python -m app.cli evaluate DATASET.jsonl [--k 5 --k 10] [--no-rerank] [--output report.json]
     python -m app.cli build-eval-set OUT.jsonl [--per-type N]
     python -m app.cli groq-models           # list models available to GROQ_API_KEY
+    python -m app.cli export-index [--output FILE]     # write the prebuilt index (seed)
+    python -m app.cli import-index [FILE] [--force]    # load it into an empty database
 """
 
 from __future__ import annotations
@@ -114,6 +116,36 @@ async def cmd_build_eval(args) -> int:
     return 0
 
 
+async def cmd_export_index(args) -> int:
+    from app.ingestion.seed import SeedError, export_index
+
+    try:
+        r = await asyncio.to_thread(export_index, args.output)
+    except SeedError as e:
+        print(f"export refused: {e}", file=sys.stderr)
+        return 1
+    size = Path(r.path).stat().st_size / 1e6
+    _print({"path": r.path, "size_mb": round(size, 1), "rows": r.rows, "seconds": round(r.seconds, 1),
+            "pipeline_version": r.manifest["pipeline_version"], "embedding_model": r.manifest["embedding_model"]})
+    return 0
+
+
+async def cmd_import_index(args) -> int:
+    from app.core.cache import bump_corpus_version
+    from app.ingestion.runner import SyncAlreadyRunning, sync_lock
+    from app.ingestion.seed import SeedError, import_index
+
+    try:
+        async with sync_lock():
+            r = await asyncio.to_thread(import_index, args.file, None, args.force, args.allow_model_mismatch)
+        await bump_corpus_version()
+    except (SeedError, SyncAlreadyRunning) as e:
+        print(f"import refused: {e}", file=sys.stderr)
+        return 1
+    _print({"imported": r.rows, "seconds": round(r.seconds, 1), "warnings": r.warnings})
+    return 0
+
+
 async def cmd_groq_models(args) -> int:
     import httpx
 
@@ -171,6 +203,12 @@ def main(argv: list[str] | None = None) -> int:
     bp.add_argument("output")
     bp.add_argument("--per-type", type=int, default=40)
     bp.add_argument("--seed", type=int, default=13)
+    xp = sub.add_parser("export-index", help="write a prebuilt index (seed) file")
+    xp.add_argument("--output", default=get_settings().index_seed_path)
+    ip = sub.add_parser("import-index", help="load a prebuilt index into an empty database")
+    ip.add_argument("file", nargs="?", default=get_settings().index_seed_path)
+    ip.add_argument("--force", action="store_true", help="replace an existing index")
+    ip.add_argument("--allow-model-mismatch", action="store_true")
     sub.add_parser("groq-models")
     sub.add_parser("db-check")
 
@@ -178,7 +216,8 @@ def main(argv: list[str] | None = None) -> int:
     handlers = {
         "sync": cmd_sync, "embed": cmd_embed, "reindex": lambda a: cmd_embed(a, full=a.full),
         "status": cmd_status, "counts": cmd_counts, "snapshot": cmd_snapshot, "evaluate": cmd_evaluate,
-        "build-eval-set": cmd_build_eval, "groq-models": cmd_groq_models, "db-check": cmd_db_check,
+        "build-eval-set": cmd_build_eval, "groq-models": cmd_groq_models,
+        "export-index": cmd_export_index, "import-index": cmd_import_index, "db-check": cmd_db_check,
     }
 
     async def runner() -> int:
