@@ -1,0 +1,17 @@
+# secrets
+.env
+.env.*
+!.env.example
+# local model weights / caches
+.models/
+.cache/
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+# outputs
+reports/
+*.log

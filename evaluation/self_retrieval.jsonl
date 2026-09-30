@@ -1,0 +1,160 @@
+{"id": "self-qna_type1-69", "question": "দাগ নং কি", "expected_source_ids": ["qna_type1:69"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-78", "question": "ডি,সি,আর কি", "expected_source_ids": ["qna_type1:78"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-185", "question": "সাপোর্ট টিকেট বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:185"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-129", "question": "অর্পিত সম্পত্তি কাকে বলে", "expected_source_ids": ["qna_type1:129"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-178", "question": "হোল্ডিং নাম্বার বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:178"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-217", "question": "DCR কাকে বলে", "expected_source_ids": ["qna_type1:217"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-229", "question": "জলমহাল বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:229"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-29", "question": "বাংলাদেশে স্থাবর সম্পত্তি অধিগ্রহণের জন্য কোন আইন গুরুত্বপূর্ণ?", "expected_source_ids": ["qna_type1:29"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-44", "question": "হাট-বাজারের জমি কার মালিকানায় থাকতে পারে?", "expected_source_ids": ["qna_type1:44"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-174", "question": "এসএ খতিয়ান বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:174"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-57", "question": "সি,এস রেকর্ড কি", "expected_source_ids": ["qna_type1:57"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-180", "question": "হোল্ডিং নং বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:180"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-34", "question": "সিকস্তির পর জমি আবার জেগে উঠলে পুরোনো মালিকের অধিকার থাকে কি?", "expected_source_ids": ["qna_type1:34"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-234", "question": "মিউটেশন কি", "expected_source_ids": ["qna_type1:234"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-55", "question": "জনসাধারণের রাস্তা বা খাল কি ব্যক্তির নামে বন্দোবস্ত করা যায়?", "expected_source_ids": ["qna_type1:55"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-172", "question": "ডি সি আর বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:172"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-197", "question": "নাদাবী দলিল কাকে বলে", "expected_source_ids": ["qna_type1:197"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-71", "question": "চান্দিনা ভিটি কি", "expected_source_ids": ["qna_type1:71"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-30", "question": "সরকারি প্রকল্পের জন্য ব্যক্তিমালিকানাধীন জমি অধিগ্রহণ হতে পারে কি?", "expected_source_ids": ["qna_type1:30"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-7", "question": "খতিয়ানে ভুল হলে কি করা যায়?", "expected_source_ids": ["qna_type1:7"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-143", "question": "এস,এ খতিয়ান বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:143"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-228", "question": "পয়ন্তি কাকে বলে", "expected_source_ids": ["qna_type1:228"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-52", "question": "কৃষিজমি সুরক্ষা কেন গুরুত্বপূর্ণ?", "expected_source_ids": ["qna_type1:52"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-200", "question": "রায় দলিল কাকে বলে", "expected_source_ids": ["qna_type1:200"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-79", "question": "দলিল কি", "expected_source_ids": ["qna_type1:79"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-24", "question": "জমি কর বকেয়া থাকলে কি হতে পারে?", "expected_source_ids": ["qna_type1:24"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-115", "question": "সিকস্তি কাকে বলে", "expected_source_ids": ["qna_type1:115"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-21", "question": "জনসাধারণের ব্যবহার্য খাস জমি কি?", "expected_source_ids": ["qna_type1:21"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-157", "question": "ছুট দাগ বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:157"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-163", "question": "নাল জমি বলতে কি বুঝায়", "expected_source_ids": ["qna_type1:163"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-28", "question": "অধিগ্রহণ ও হুকুমদখলের মূল পার্থক্য কি?", "expected_source_ids": ["qna_type1:28"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-74", "question": "সিকস্তি কি", "expected_source_ids": ["qna_type1:74"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-238", "question": "ভূমি অফিসে ঘুষ দাবি করলে কী করব?", "expected_source_ids": ["qna_type1:238"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-10", "question": "নামজারি আর খতিয়ান কি একই জিনিস?", "expected_source_ids": ["qna_type1:10"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-215", "question": "আমিন কাকে বলে", "expected_source_ids": ["qna_type1:215"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-70", "question": "ছুট দাগ কি", "expected_source_ids": ["qna_type1:70"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-120", "question": "ডি,সি,আর কাকে বলে", "expected_source_ids": ["qna_type1:120"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-227", "question": "সিকস্তি কাকে বলে", "expected_source_ids": ["qna_type1:227"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-116", "question": "পয়স্তি কাকে বলে", "expected_source_ids": ["qna_type1:116"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type1-32", "question": "পয়স্তি কি?", "expected_source_ids": ["qna_type1:32"], "tags": ["self_qna_type1"]}
+{"id": "self-qna_type2-25370", "question": "জমি মিউটিউশন করতে কি কি লাগবে", "expected_source_ids": ["qna_type2:25370"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25591", "question": "খতিয়ানের করণিক ভুল সংশোধন করার উপায় ।", "expected_source_ids": ["qna_type2:25591"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25321", "question": "খাজনা দিবো কি করে", "expected_source_ids": ["qna_type2:25321"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25284", "question": "আমি কিভাবে একজন মৃত ব্যাক্তির সকল সম্পদের খতিয়ান পেতে পারি", "expected_source_ids": ["qna_type2:25284"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25768", "question": "ভূমি উন্নয়ন কর পরিশোধের জন্য কি করতে হবে", "expected_source_ids": ["qna_type2:25768"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25611", "question": "নামজারী কি", "expected_source_ids": ["qna_type2:25611"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25769", "question": "ভূমি উন্নয়ন করের হার জানতে চাই", "expected_source_ids": ["qna_type2:25769"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25499", "question": "কি পরিমান কৃষি খাস জমি ভূমিহীদের বন্দোবস্ত দেয়া যায়", "expected_source_ids": ["qna_type2:25499"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25055", "question": "অনলাইনে জমি খারিজ করতে কি কি ডকুমেন্টস লাগে।", "expected_source_ids": ["qna_type2:25055"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25568", "question": "জমির পরিমাণ কিভাবে জানব", "expected_source_ids": ["qna_type2:25568"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25385", "question": "আমি কিভাবে খাজনা দিবো", "expected_source_ids": ["qna_type2:25385"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25811", "question": "কিভাবে আমাদের সম্পত্তি ফেরত পেতে পারি", "expected_source_ids": ["qna_type2:25811"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25097", "question": "অনলাইন হোল্ডিং আছে আমার, যে কেউ আমার খাজনা/ভূমি উন্নয়ন কর দিতে পারবে", "expected_source_ids": ["qna_type2:25097"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25792", "question": "জমির মালিকানা দেখতে পারতেছি না", "expected_source_ids": ["qna_type2:25792"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25801", "question": "নামজারির বাকি ধাপগুলি পার করতে কতদিন লাগবে", "expected_source_ids": ["qna_type2:25801"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25191", "question": "জমির দলিল হারিয়ে ফেলেছি, এখন কি করতে পারি", "expected_source_ids": ["qna_type2:25191"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25454", "question": "১ নং খতিয়ান ব্যাখ্যা করুন", "expected_source_ids": ["qna_type2:25454"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25252", "question": "জমির অরিজিনাল ম্যাপ পাওয়া যাবে কি", "expected_source_ids": ["qna_type2:25252"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25199", "question": "আপনাদের ভূমি সেবা ওয়েব সাইট থেকে কিভাবে খতিয়ান নিবো", "expected_source_ids": ["qna_type2:25199"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25592", "question": "খতিয়ান করতে কোথায় যেতে হবে", "expected_source_ids": ["qna_type2:25592"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25363", "question": "অরিজিনাল ম্যাপ কোথায় পাওয়া যাবে", "expected_source_ids": ["qna_type2:25363"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25626", "question": "জমির খাজনা দিতে কি লাগে", "expected_source_ids": ["qna_type2:25626"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-24910", "question": "ওয়ারিশ সার্টিফিকেট পাঠানো ছাড়া অনলাইনে খাজনা/ভূমি উন্নয়ন কর দেওয়া যাবেনা।", "expected_source_ids": ["qna_type2:24910"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25383", "question": "কিভাবে ভূমির রেকর্ড দেখবো", "expected_source_ids": ["qna_type2:25383"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25422", "question": "পাসপোর্ট নাম্বার দিয়ে ভূমির কর অনলাইনে দেয়া যাবে", "expected_source_ids": ["qna_type2:25422"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25682", "question": "মঘী জরিপ খতিয়ান কোথায় পাব", "expected_source_ids": ["qna_type2:25682"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25088", "question": "জমির খতিয়ান/পর্চা আপলোড করা হয়েছে কিন্তু অনলাইনে হোল্ডিং নাম্বার দিচ্ছে না বিধায় খাজনা/ভূমি উন্নয়ন কর পরিশোধ করা যাচ্ছে না কি করা যায়", "expected_source_ids": ["qna_type2:25088"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25414", "question": "ldtax.gov.bd ওয়েবসাইটে নাগরিক নিবন্ধন সফল হয়েছে, খতিয়ান আপলোড করা হয়েছে, এখনোও হোল্ডিং পাই নাই। পদক্ষেপ অপেক্ষামান লেখা আসছে করনীয় কি", "expected_source_ids": ["qna_type2:25414"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25324", "question": "বিএস খতিয়ান কোথায় পাওয়া যাবে", "expected_source_ids": ["qna_type2:25324"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25233", "question": "ভূমিহীনদের বন্দোবস্তকৃত সম্পত্তির দলিল হয়েছে ভাটা দাগের ওপর। কিন্তু খতিয়ানের খোঁজ পাওয়া যাচ্ছে না। সেক্ষত্রে খতিয়ান নেওয়ার উপায় কি", "expected_source_ids": ["qna_type2:25233"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25616", "question": "মৌজা ম্যাপ এর ফি কত", "expected_source_ids": ["qna_type2:25616"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25089", "question": "অনলাইনে নামজারির জন্য আবেদন করেছি এখানে খতিয়ানের ধরন এর জায়গায় নামজারি পরিবর্তে অন্যান্য দিয়েছে এটা দিয়ে কি নামজারি হবে।", "expected_source_ids": ["qna_type2:25089"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-24950", "question": "কোন খতিয়ান/পর্চা ভেঙে কোন খতিয়ান/পর্চা হলো কোন দাগ ভেঙে কোন দাগ হলো।এটা অনলাইনে জানার কোন উপায় আছে কি", "expected_source_ids": ["qna_type2:24950"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25770", "question": "যৌথ খতিয়ানের খাজনা কি আলাদা আলাদা দেওয়া যাবে", "expected_source_ids": ["qna_type2:25770"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25077", "question": "ভূমি উন্নয়ন কর অনলাইন দেওয়ার সময় খতিয়ান/পর্চা সংযুক্ত করতে হয় এটা কোন খতিয়ান/পর্চা এস এ,আর এস এগুলা নাকি খারিজ খতিয়ান/পর্চা", "expected_source_ids": ["qna_type2:25077"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25671", "question": "নামজারি খসড়া খতিয়ানে কারনিক ভুল সংশোধনে কত সময় লাগতে পারে", "expected_source_ids": ["qna_type2:25671"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25609", "question": "নামজারি করা যাবে এটা দিয়ে", "expected_source_ids": ["qna_type2:25609"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25756", "question": "দাগ নাম্বার দিয়ে কি জমির বর্তমান মালিকের পূর্ববর্তী মালিকের নাম জানা যাবে", "expected_source_ids": ["qna_type2:25756"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-24879", "question": "খাজনা/ভূমি উন্নয়ন কর অনলাইনে পরিশোধ করা যায় না", "expected_source_ids": ["qna_type2:24879"], "tags": ["self_qna_type2"]}
+{"id": "self-qna_type2-25301", "question": "বর্তমান এক কাঠা মাটি খারিজ করতে কত টাকা লাগে", "expected_source_ids": ["qna_type2:25301"], "tags": ["self_qna_type2"]}
+{"id": "self-section-1600", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ১৫ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1600"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1600", "question": "বিবিধ", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1060", "question": "বালুমহাল ও মাটি ব্যবস্থাপনা আইন, ২০১০ এর ধারা ২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1060"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1060", "question": "সংজ্ঞা", "expected_source_ids": ["ebook:237"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-441", "question": "অর্পিত সম্পত্তি প্রত্যর্পণ (দ্বিতীয় সংশোধন) আইন, ২০১৩ এর ধারা ২৩ এ কী বলা হয়েছে?", "expected_source_ids": ["section:441"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-441", "question": "২০০১ সনের ১৬ নং আইনের ধারা ২৭ এর সংশোধন", "expected_source_ids": ["ebook:87"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1330", "question": "The Public Demands Recovery Act, 1913 (Bengal Act) এর ধারা ৪১ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1330"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1330", "question": "Persons under disability", "expected_source_ids": ["ebook:255"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1700", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ৫৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1700"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1700", "question": "ক্ষতিপূরণ হিসাবে প্রদেয় অর্থের সীমা ও পরিমাণ", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-556", "question": "স্থাবর সম্পত্তি অধিগ্রহণ ও হুকুমদখল আইন, ২০১৭ এর ধারা ১৯ এ কী বলা হয়েছে?", "expected_source_ids": ["section:556"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-556", "question": "অধিগ্রহণকৃত স্থাবর সম্পত্তি ব্যবহার", "expected_source_ids": ["ebook:91"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1324", "question": "The Public Demands Recovery Act, 1913 (Bengal Act) এর ধারা ৩৬ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1324"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1324", "question": "Suit to recover possession of, or to set aside sale of, immovable property, where notice of certificate not served", "expected_source_ids": ["ebook:255"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1540", "question": "ভূমি সংস্কার আইন,২০২৩ এর ধারা ২২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1540"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1540", "question": "রহিতকরণ ও হেফাজত", "expected_source_ids": ["ebook:294"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1179", "question": "The Acquisition of Waste Land Act, 1950 (East Bengal Act) এর ধারা ১৩ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1179"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1179", "question": "Apportionment of compensation", "expected_source_ids": ["ebook:245"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1929", "question": "ভূমি উন্নয়ন কর আইন, ২০২৩ এর ধারা ১৩ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1929"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1929", "question": "ভূমি উন্নয়ন কর প্রদান হইতে অব্যাহতি।---", "expected_source_ids": ["ebook:751"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1004", "question": "মহানগরী, বিভাগীয় শহর ও জেলা শহরের পৌর এলাকাসহ দেশের সকল পৌর এলাকার খেলার মাঠ, উন্মুক্ত স্থান, উদ্যান এবং প্রাকৃতিক জলাধার সংরক্ষণ আইন, ২০০০ এর ধারা ১০ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1004"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1004", "question": "সরল বিশ্বাসে কৃত কাজকর্ম রক্ষণ", "expected_source_ids": ["ebook:230"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1574", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1574"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1574", "question": "সংজ্ঞা", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1295", "question": "The Public Demands Recovery Act, 1913 (Bengal Act) এর ধারা ৮ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1295"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1295", "question": "Effect of service of notice of certificate", "expected_source_ids": ["ebook:255"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1768", "question": "বালুমহাল ও মাটি ব্যবস্থাপনা বিধিমালা,২০১১ (বিলুপ্ত) এর বিধি ৯ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1768"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1768", "question": "তালিকাভুক্তি, ইত্যাদি ।–", "expected_source_ids": ["ebook:333"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1216", "question": "The Non-Agricultural Tenancy Act, 1949 (East Bengal Act) এর ধারা ৪ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1216"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1216", "question": "Purposes for which non\u0002agricultural tenant may hold non\u0002agricultural land", "expected_source_ids": ["ebook:247"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-501", "question": "The Acquisition and Requisition of Immovable Property Ordinance, 1982.(Repealed) এর ধারা ১০ এ কী বলা হয়েছে?", "expected_source_ids": ["section:501"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-501", "question": "Payment of compensation", "expected_source_ids": ["ebook:92"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-487", "question": "The Acquisition and Requisition of Immovable Property Ordinance, 1982.(Repealed) এর ধারা ২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:487"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-487", "question": "Definitions", "expected_source_ids": ["ebook:92"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1984", "question": "ভূমি অপরাধ প্রতিরোধ ও প্রতিকার আইন, ২০২৩ এর ধারা ৯ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1984"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1984", "question": "ক্রেতা বরাবর বিক্রিত ভূমির দখল হস্তান্তর না করিবার দণ্ড", "expected_source_ids": ["ebook:669"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1510", "question": "ভূমি সংস্কার আইন,২০২৩ এর ধারা ৩ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1510"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1510", "question": "আইনের প্রাধান্য", "expected_source_ids": ["ebook:294"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1800", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ১১৮ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1800"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1800", "question": "ক্ষতিপূরণ প্রদানপূর্বক কোনো জোতের কোনো সহ-অংশীদারের স্বার্থ হস্তান্তর", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1431", "question": "The Court-fees Act, 1870 এর ধারা ২০ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1431"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1431", "question": "Rules as to costs of processes", "expected_source_ids": ["ebook:251"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1837", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ১৪১ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1837"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1837", "question": "বেঙ্গল পাবলিক ডিমান্ডস্ রিকোভারি অ্যাক্ট, ১৯১৩ অনুযায়ী বকেয়া খাজনা আদায়", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1713", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ৬৮ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1713"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1713", "question": "তামাদির মেয়াদ গণনা", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1378", "question": "EAST BENGAL TENANCY RULES, 1955 এর বিধি ২৪ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1378"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1378", "question": "Duties of officers entrusted with the work of main- taining the record-of-rights.-", "expected_source_ids": ["ebook:258"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-943", "question": "The Hindu Law of Inheritance (Amendment) Act, 1929 এর ধারা ১ এ কী বলা হয়েছে?", "expected_source_ids": ["section:943"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-943", "question": "Short title extent and application", "expected_source_ids": ["ebook:221"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1728", "question": "রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইন,১৯৫০ এর ধারা ৭৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1728"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1728", "question": "এই আইনের অধীন গৃহীত কার্যক্রমের সুরক্ষা", "expected_source_ids": ["ebook:297"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1020", "question": "THE REQUISITION OF IMMOVABLE PROPERTY RULES, 1982 এর বিধি ৬ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1020"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1020", "question": "Recovery of compensation money from the allottee", "expected_source_ids": ["ebook:232"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-612", "question": "স্থাবর সম্পত্তি অধিগ্রহণ ও হুকুমদখল আইন, ২০১৭ এর ধারা ৫১ এ কী বলা হয়েছে?", "expected_source_ids": ["section:612"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-612", "question": "ইংরেজিতে অনূদিত পাঠ প্রকাশ", "expected_source_ids": ["ebook:91"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-429", "question": "অর্পিত সম্পত্তি প্রত্যর্পণ (দ্বিতীয় সংশোধন) আইন, ২০১৩ এর ধারা ১২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:429"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-429", "question": "২০০১ সনের ১৬নং আইনের ধারা ১৪ এর সংশোধন", "expected_source_ids": ["ebook:87"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1524", "question": "ভূমি সংস্কার আইন,২০২৩ এর ধারা ৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1524"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1524", "question": "বাস্তুভিটার জন্য খাস ভূমির বন্দোবস্ত", "expected_source_ids": ["ebook:294"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-914", "question": "THE BANGLADESH ABANDONED PROPERTY (LAND, BUILDING AND ANY OTHER PROPERTY) RULES, 1972 এর বিধি ৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:914"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-914", "question": "Maintenance and audit of accounts under Article 18.", "expected_source_ids": ["ebook:202"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1052", "question": "ভূমি আপীল বোর্ড আইন, ১৯৮৯ এর ধারা ৪৷ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1052"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1052", "question": "ভূমি আপীল বোর্ড গঠন", "expected_source_ids": ["ebook:236"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-645", "question": "East Bengal Tenancy Rules, 1954 এর বিধি ৬ এ কী বলা হয়েছে?", "expected_source_ids": ["section:645"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-645", "question": "Surrender of holdings, and entry on holdings in which the interests of raiyats have been extinguished under section 92", "expected_source_ids": ["ebook:99"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1027", "question": "THE BENGAL ALLUVION AND DILUVION REGULATION, 1825 এর বিধি ৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1027"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1027", "question": "Chars thrown up in navigable river", "expected_source_ids": ["ebook:233"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1398", "question": "EAST BENGAL TENANCY RULES, 1955 এর বিধি ৪২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1398"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1398", "question": "Special Power of Revenue-officer appointed with the additional designation of Settlement officer.-", "expected_source_ids": ["ebook:258"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-498", "question": "স্থাবর সম্পত্তি অধিগ্রহণ ও হুকুমদখল আইন, ২০১৭ এর ধারা ৮ এ কী বলা হয়েছে?", "expected_source_ids": ["section:498"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-498", "question": "জেলা প্রশাসক কর্তৃক রোয়েদাদ প্রস্তুত", "expected_source_ids": ["ebook:91"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1443", "question": "The Court-fees Act, 1870 এর ধারা ৩২ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1443"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1443", "question": "[Repealed]", "expected_source_ids": ["ebook:251"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1140", "question": "The Limitation Act, 1908 এর ধারা ৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1140"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1140", "question": "Disability of one of several plaintiffs or applicants", "expected_source_ids": ["ebook:244"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-1543", "question": "The Land Development Tax Ordinance, 1976 (Repealed) এর ধারা ১৭ এ কী বলা হয়েছে?", "expected_source_ids": ["section:1543"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-1543", "question": "আপিল", "expected_source_ids": ["ebook:293"], "tags": ["self_section_heading_to_act"]}
+{"id": "self-section-479", "question": "অর্পিত সম্পত্তি প্রত্যর্পণ (পঞ্চম সংশোধন) আইন, ২০১৩ এর ধারা ২৬ এ কী বলা হয়েছে?", "expected_source_ids": ["section:479"], "tags": ["self_section_by_number"]}
+{"id": "self-heading-479", "question": "রহিতকরণ", "expected_source_ids": ["ebook:88"], "tags": ["self_section_heading_to_act"]}

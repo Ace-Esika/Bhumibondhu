@@ -1,0 +1,588 @@
+[
+ {
+  "id": 164,
+  "multiple_reference_link": [
+   "[]"
+  ],
+  "sections": [
+   {
+    "id": 779,
+    "act_id": 164,
+    "number": "1.",
+    "heading": "Short title",
+    "content": "<p>This Ordinance may be called the Alienation of Land (Distressed<br>Circumstances) (Restoration) Ordinance, 1976.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 780,
+    "act_id": 164,
+    "number": "2.",
+    "heading": "Definitions",
+    "content": "<p>In this Ordinance, unless there is anything repugnant in the subject or<br>context,-<br>(a) \"agricultural land” means land which is used for purposes connected with agriculture or horticulture and includes a homestead as defined in the State Acquisition and Tenancy Act, 1950 (E.B. Act XXVIII of 1951);<br>(b) \"authorised Officer\" means any officer authorised by the Government;<br>(c) \"period of economic distress\" means the period commencing the 1st April, 1974, and ending the 31st day of December, 1974; and<br>(d) \"transferee\", in relation to a land in respect of which the application for restoration has been made under section 4, includes, if the land is in<br>possession of any person other than the transferee, such person.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 781,
+    "act_id": 164,
+    "number": "3.",
+    "heading": "Liability to restoration of alienated land",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1234,
+      "act_id": 164,
+      "section_id": 781,
+      "number": "(1)",
+      "content": "<p>Notwithstanding anything contained in any other law for the time being<br>in force, all agricultural lands transferred by sale for consideration during the<br>period of economic distress for reasons of such distress shall, on application<br>made in this behalf, be liable to be restored to the transferor with the<br>provisions of this Ordinance.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1235,
+      "act_id": 164,
+      "section_id": 781,
+      "number": "(2)",
+      "content": "<p>For the purpose of this Ordinance, transfer of agricultural land within the<br>period of economic distress shall be deemed to have been made for reasons<br>of such economic distress if the transferor and the members of his family do<br>not in the aggregate own, after the transfer, more than three acres of such<br>land.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1236,
+      "act_id": 164,
+      "section_id": 781,
+      "number": "(3)",
+      "content": "<p>For the purpose of this section, \"family\", in relation to a transferor,<br>includes his wife, son, unmarried daughter, but does not include an adult and married son who has been living in a separate mess independently of his parents continuously for five years, and the wife, son and unmarried<br>daughter of such son.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 782,
+    "act_id": 164,
+    "number": "4.",
+    "heading": "Procedure for restoration",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1237,
+      "act_id": 164,
+      "section_id": 782,
+      "number": "(1)",
+      "content": "<p>A person who seeks restoration of agricultural land transferred by him<br>during the period of economic distress for reasons of such distress may,<br>within a period of six months from the commencement of this Ordinance,<br>make an application to the authorised officer for the restoration of the land so transferred stating therein-<br>(a) the name of the transferee and, if such land is in possession of any<br>person other than the transferee, the name of that person;<br>(b) the date of transfer;<br>(c) the amount of consideration of such land.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1291,
+      "act_id": 164,
+      "section_id": 782,
+      "number": "(2)",
+      "content": "<p>Upon receipt of an application under sub-section (1), the authorised<br>officer shall, if he is satisfied after giving the transferee an opportunity of<br>being heard that the land to which the application relates is liable to be<br>restored under section 3, by order in writing,-</p>",
+      "total_number_of_schedules": 0,
+      "schedules": [
+       {
+        "id": 456,
+        "act_id": 164,
+        "section_id": 782,
+        "sub_section_id": 1291,
+        "number": "(a)",
+        "content": "<p>direct the transferee to restore the land to the applicant and do such other<br>acts that may be necessary for effective restoration as may be specified in<br>order; and</p>",
+        "total_number_of_sub_schedules": 0,
+        "subschedules": []
+       },
+       {
+        "id": 457,
+        "act_id": 164,
+        "section_id": 782,
+        "sub_section_id": 1291,
+        "number": "(b)",
+        "content": "<p>for the purpose of payment to the transferee direct the applicant to pay in<br>such manner as may be specified in the order,-</p>",
+        "total_number_of_sub_schedules": 0,
+        "subschedules": [
+         {
+          "id": 84,
+          "act_id": 164,
+          "section_id": 782,
+          "sub_section_id": 1291,
+          "schedule_id": 457,
+          "number": "(i)",
+          "content": "<p>one-sixth of the amount of consideration for which the land was<br>transferred by the applicant in cash, by date specified in the order; and</p>"
+         },
+         {
+          "id": 85,
+          "act_id": 164,
+          "section_id": 782,
+          "sub_section_id": 1291,
+          "schedule_id": 457,
+          "number": "(ii)",
+          "content": "<p>the remaining five-sixths of the said amount of consideration together with<br>interest on such amount at the rate of six and one-fourth per cent per annum from the date of the receipt of the amount by the applicant on account of the transfer of the land less the sum determined by the authorised officer of the net income, if any, derived from the land by the transferee, by five annual equal instalments:<br>Provided that the first of the aforesaid instalments shall be payable on a date not later than the first day of Baishakh next following the date of the order.</p>"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 801,
+    "act_id": 164,
+    "number": "5.",
+    "heading": "Effect of order for the restoration",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1292,
+      "act_id": 164,
+      "section_id": 801,
+      "number": "(1)",
+      "content": "<p>When the authorised officer makes an order under sub-section (2) of<br>section 4 restoring any agricultural land, such order shall take effect on the<br>1st day of Baishakh next following the date of the order.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1293,
+      "act_id": 164,
+      "section_id": 801,
+      "number": "(2)",
+      "content": "<p>If, on or before the date on which an order under sub-section (2) of<br>section 4 takes effect, the land to which the order relates has not been<br>restored as required by the order, the authorised officer may, on his motion,<br>and shall, on the application of such person, restore the land to the applicant by evicting the person in possession of the land, and for such eviction the authorised officer may use such force as may be necessary.</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 802,
+    "act_id": 164,
+    "number": "6.",
+    "heading": "Recovery of sums as a public demand",
+    "content": "<p>Any sum payable under an order made under sub-section (2) of section 4 shall be recoverable as a public demand.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 803,
+    "act_id": 164,
+    "number": "7.",
+    "heading": "Prohibition of alienation",
+    "content": "<p>No person to whom any agricultural land has been restored by an order<br>under sub-section (2) of section 4 shall, as long as there remains unpaid any sum payable by such person under the order made under that sub-section, transfer or create any charge upon such land or any portion thereof and, notwithstanding anything contained in any other law for the time being in force, any transfer made or charge created shall be void.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 804,
+    "act_id": 164,
+    "number": "8.",
+    "heading": "Appeal",
+    "content": "<p>An appeal against an order passed by the authorised officer under this<br>Ordinance, if preferred within thirty days of the date of such order, shall lie to the ¹[Assistant Judge] having territorial jurisdiction and the order of the 2[Assistant Judge] on such appeal shall be final.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 806,
+    "act_id": 164,
+    "number": "9.",
+    "heading": "Jurisdiction of court barred",
+    "content": "<p>Except as provided in section 8, any order passed, any action taken or<br>anything done under the provisions of this Ordinance shall not be called in question in any court.</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   }
+  ],
+  "ebooks_type": "অধ্যাদেশ",
+  "act_year": "1976",
+  "number": "XXVIII",
+  "title_of_act": "The Alienation of Land (Distressed Circumstances) (Restoration) Ordinance, 1976",
+  "publication_date": "1976-04-29",
+  "publication_by": "নন-গেজেট",
+  "proposal": "<p>WHEREAS it is expedient for the restoration of agricultural lands transferred during the period of economic distress for reasons of such distress;</p>",
+  "objective": "<p>NOW, THEREFORE, in pursuance of the proclamations of the 20th August, 1975, and 8th November, 1975, and in exercise of all powers enabling him in that behalf, the President is pleased to make and promulgate the following Ordinance:-</p>",
+  "file": "https://bhumipedia.land.gov.bd/uploads/PDF/Act/The_Alienation_of_Land_Distressed_Circumstances_Restoration_Ordinance_1976.pdf",
+  "cover": "https://bhumipedia.land.gov.bd/uploads/Cover/Act/The_Alienation_of_Land_Distressed_Circumstances_Restoration_Ordinance_1976_Qay1osH.jpg",
+  "schedules": "",
+  "bar_code": "",
+  "created_date": "2023-09-18T10:32:02.739671+06:00"
+ },
+ {
+  "id": 241,
+  "multiple_reference_link": [
+   "[]"
+  ],
+  "sections": [
+   {
+    "id": 1092,
+    "act_id": 241,
+    "number": "১।",
+    "heading": "সংক্ষিপ্ত শিরোনাম ও প্রবর্তন",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1723,
+      "act_id": 241,
+      "section_id": 1092,
+      "number": "(১)",
+      "content": "<p>এই আইন পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন (সংশোধন) আইন, ২০১৬ নামে অভিহিত হইবে।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1724,
+      "act_id": 241,
+      "section_id": 1092,
+      "number": "(২)",
+      "content": "<p>ইহা অবিলম্বে কার্যকর হইবে।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 1093,
+    "act_id": 241,
+    "number": "২।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের প্রস্তাবনার সংশোধন",
+    "content": "<p>পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন আইন, ২০০১ (২০০১ সনের ৫৩ নং আইন), অতঃপর উক্ত আইন বলিয়া উল্লিখিত, এর প্রস্তাবনার তৃতীয় অনুচ্ছেদে উল্লিখিত “পার্বত্য জেলা সংক্রান্ত জাতীয় কমিটি এবং পার্বত্য জনসংহতি সমিতি” শব্দগুলির পরিবর্তে “পার্বত্য চট্টগ্রাম বিষয়ক জাতীয় কমিটি এবং পার্বত্য চট্টগ্রাম জনসংহতি সমিতি” শব্দগুলি প্রতিস্থাপিত হইবে।\"</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 1094,
+    "act_id": 241,
+    "number": "৩।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ৩ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ৩ এর উপ- ধারা (২) এর দফা (ঘ) তে উল্লিখিত “সংশ্লিষ্ট সার্কেল চীফ, পদাধিকারবলে” শব্দগুলি ও কমার পরিবর্তে “সংশ্লিষ্ট সার্কেল চীফ বা তৎকর্তৃক মনোনীত একজন প্রতিনিধি” শব্দগুলি প্রতিস্থাপিত হইবে।</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 1095,
+    "act_id": 241,
+    "number": "৪।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ৪ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ৪ এর উপ- ধারা (২) এ উল্লিখিত “যে কোন পার্বত্য জেলায়” শব্দগুলির পরিবর্তে “যে কোন পার্বত্য জেলাসহ অন্য কোন স্থানে” শব্দগুলি প্রতিস্থাপিত হইবে।</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 1096,
+    "act_id": 241,
+    "number": "৫।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ৬ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ৬ এর উপ-ধারা (১) এর-</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1725,
+      "act_id": 241,
+      "section_id": 1096,
+      "number": "(ক)",
+      "content": "<p>দফা (ক) এর পরিবর্তে নিম্নরূপ দফা (ক) প্রতিস্থাপিত হইবে, যথা :—</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1726,
+      "act_id": 241,
+      "section_id": 1096,
+      "number": "0",
+      "total_number_of_schedules": 0,
+      "schedules": [
+       {
+        "id": 527,
+        "act_id": 241,
+        "section_id": 1096,
+        "sub_section_id": 1726,
+        "number": "(ক) ",
+        "content": "<p>পুনর্বাসিত শরণার্থীদের ভূমি সংক্রান্ত বিরোধ এবং অবৈধ বন্দোবস্ত ও বেদখল হওয়া ভূমি সংক্রান্ত বিরোধ পার্বত্য চট্টগ্রামের প্রচলিত আইন, রীতি ও পদ্ধতি অনুযায়ী নিষ্পত্তি করা;</p>",
+        "total_number_of_sub_schedules": 0,
+        "subschedules": []
+       }
+      ]
+     },
+     {
+      "id": 1727,
+      "act_id": 241,
+      "section_id": 1096,
+      "number": "(খ)",
+      "content": "<p>দফা (খ) তে উল্লিখিত “আইন ও রীতি” শব্দগুলির পরিবর্তে “আইন, রীতি ও পদ্ধতি” শব্দগুলি ও কমা প্রতিস্থাপিত হইবে;</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1728,
+      "act_id": 241,
+      "section_id": 1096,
+      "number": "(গ) ",
+      "content": "<p>দফা (গ) এর পরিবর্তে নিম্নরূপ দফা (গ) প্রতিস্থাপিত হইবে, যথা :—</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1729,
+      "act_id": 241,
+      "section_id": 1096,
+      "number": "0",
+      "total_number_of_schedules": 0,
+      "schedules": [
+       {
+        "id": 528,
+        "act_id": 241,
+        "section_id": 1096,
+        "sub_section_id": 1729,
+        "number": "(গ)",
+        "content": "<p>পার্বত্য চট্টগ্রামের প্রচলিত আইন, রীতি ও পদ্ধতি বহির্ভূতভাবে জলেভাসা ভূমিসহ (Fringe Land) কোন ভূমি বন্দোবস্ত প্রদান বা বেদখল করা হইয়া থাকিলে উহা বাতিলকরণ এবং বন্দোবস্তজনিত বা বেদখলজনিত কারণে<br>কোনো বৈধ মালিক ভূমি হইতে বেদখল হইয়া থাকিলে তাহার দখল পুনর্বহাল ।</p><p>তবে শর্ত থাকে যে, পার্বত্য চট্টগ্রামের প্রচলিত আইন, রীতি ও পদ্ধতি অনুযায়ী অধিগ্রহণকৃত ভূমি এবং বসতবাড়ীসহ জলেভাসা ভূমি, টিলা ও পাহাড় ব্যতীত কাপ্তাই জলবিদ্যুৎ প্রকল্প এলাকা ও বেতবুনিয়া ভূ-উপগ্রহ এলাকার ক্ষেত্রে এই উপ-ধারা প্রযোজ্য হইবে না।</p>",
+        "total_number_of_sub_schedules": 0,
+        "subschedules": []
+       }
+      ]
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 1097,
+    "act_id": 241,
+    "number": "৬।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ৭ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ৭ এর—<br>&nbsp;</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1730,
+      "act_id": 241,
+      "section_id": 1097,
+      "number": "(ক)",
+      "content": "<p>উপ-ধারা (৩) এ উল্লিখিত “অপর দুইজন সদস্যের” শব্দগুলির পরিবর্তে “অপর তিনজন সদস্যের” শব্দগুলি প্রতিস্থাপিত হইবে;</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1731,
+      "act_id": 241,
+      "section_id": 1097,
+      "number": "(খ)",
+      "content": "<p>উপ-ধারা (৪) এর প্রান্তস্থিত দাঁড়ির পরিবর্তে কোলন প্রতিস্থাপিত হইবে এবং অতঃপর নিম্নরূপ শর্তাংশ সংযোজিত হইবে, যথা:—<br>&nbsp;</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1732,
+      "act_id": 241,
+      "section_id": 1097,
+      "number": "(গ)",
+      "content": "<p>উপ-ধারা (৫) এ উল্লিখিত “চেয়ারম্যানের সিদ্ধান্তই কমিশনের সিদ্ধান্ত বলিয়া গণ্য হইবে” শব্দগুলির পরিবর্তে “চেয়ারম্যানসহ উপস্থিত সংখ্যাগরিষ্ঠ সদস্যের গৃহীত সিদ্ধান্তই কমিশনের সিদ্ধান্ত বলিয়া গণ্য হইবে” শব্দগুলি প্রতিস্থাপিত হইবে।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1733,
+      "act_id": 241,
+      "section_id": 1097,
+      "number": "(গ)",
+      "content": "<p>উপ-ধারা (৫) এ উল্লিখিত “চেয়ারম্যানের সিদ্ধান্তই কমিশনের সিদ্ধান্ত বলিয়া গণ্য হইবে” শব্দগুলির পরিবর্তে “চেয়ারম্যানসহ উপস্থিত সংখ্যাগরিষ্ঠ সদস্যের গৃহীত সিদ্ধান্তই কমিশনের সিদ্ধান্ত বলিয়া গণ্য হইবে” শব্দগুলি প্রতিস্থাপিত হইবে।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 1098,
+    "act_id": 241,
+    "number": "৭।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ৯ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ৯ এর—</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1734,
+      "act_id": 241,
+      "section_id": 1098,
+      "number": "(ক)",
+      "content": "<p>উপান্ত-টীকায় উল্লিখিত “কমিশনের আবেদন দাখিল” শব্দগুলির পরিবর্তে “কমিশনের নিকট আবেদন দাখিল” শব্দগুলি প্রতিস্থাপিত হইবে;</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1735,
+      "act_id": 241,
+      "section_id": 1098,
+      "number": "(খ)",
+      "content": "<p>বিদ্যমান বিধান উপ-ধারা (১) হিসাবে পুনঃসংখ্যায়িত হইবে এবং অতঃপর নিম্নরূপ নূতন উপ-ধারা (২) সংযোজিত হইবে, যথা—<br>“(২) কমিশন কর্তৃক উক্ত আবেদন নিষ্পত্তির পূর্বে যে কোন সময়ে ন্যায় বিচারের স্বার্থে, কমিশনের অনুমতি সাপেক্ষে, আবেদনকারী তাঁহার আবেদন একবার সংশোধন করিতে পারিবেন।” ।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   },
+   {
+    "id": 1099,
+    "act_id": 241,
+    "number": "৮।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ১৩ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ১৩ এর উপ-ধারা (২) এর পর নিম্নরূপ নূতন উপ-ধারা (৩) সংযোজিত হইবে, যথা:-</p><p>“(৩) কমিশনের সচিব এবং অন্যান্য কর্মকর্তা ও কর্মচারী পদে পার্বত্য চট্টগ্রাম অঞ্চলের উপজাতীয়দের অগ্রাধিকার প্রদানক্রমে স্থায়ী অধিবাসীদেরকে নিয়োগ করা হইবে।”।</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 1100,
+    "act_id": 241,
+    "number": "৯।",
+    "heading": "২০০১ সনের ৫৩ নং আইনের ধারা ১৮ এর সংশোধন",
+    "content": "<p>উক্ত আইনের ধারা ১৮ তে উল্লিখিত “এই আইন বলবৎ হইবার ছয় মাসের মধ্যে,” শব্দগুলি ও কমার পরিবর্তে “যথাশীঘ্র” শব্দ প্রতিস্থাপিত হইবে।</p>",
+    "total_number_of_sub_section": 0,
+    "subsections": [],
+    "schedules": []
+   },
+   {
+    "id": 1101,
+    "act_id": 241,
+    "number": "১০।",
+    "heading": "রহিতকরণ ও হেফাজত",
+    "total_number_of_sub_section": 0,
+    "subsections": [
+     {
+      "id": 1736,
+      "act_id": 241,
+      "section_id": 1101,
+      "number": "(১)",
+      "content": "<p>পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন (সংশোধন) অধ্যাদেশ, ২০১৬ (অধ্যাদেশ নং ১, ২০১৬) এতদ্বারা রহিত করা হইল ।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     },
+     {
+      "id": 1737,
+      "act_id": 241,
+      "section_id": 1101,
+      "number": "(২)",
+      "content": "<p>উপ-ধারা (১) এর অধীন রহিত সত্ত্বেও, উক্ত অধ্যাদেশের অধীন কৃত কাজকর্ম বা গৃহীত ব্যবস্থা এই আইনের অধীন কৃত বা গৃহীত হইয়াছে বলিয়া গণ্য হইবে।</p>",
+      "total_number_of_schedules": 0,
+      "schedules": []
+     }
+    ],
+    "schedules": []
+   }
+  ],
+  "ebooks_type": "আইন",
+  "act_year": "২০১৬",
+  "number": "53",
+  "title_of_act": "পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন আইন ,২০০১",
+  "publication_date": "2001-07-17",
+  "publication_by": "গেজেট",
+  "proposal": "<p>সংসদ কর্তৃক গৃহীত নিম্নলিখিত আইনটি ২৮ আশ্বিন, ১৪২৩ মোতাবেক ১৩ অক্টোবর, ২০১৬ তারিখে রাষ্ট্রপতির সম্মতিলাভ করিয়াছে এবং এতদ্বারা এই আইনটি সর্বসাধারণের অবগতির জন্য প্রকাশ<br>করা যাইতেছে :</p>",
+  "objective": "<p>যেহেতু নিম্নবর্ণিত উদ্দেশ্যসমূহ পূরণকল্পে পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন আইন, ২০০১ (২০০১ সনের ৫৩ নং আইন) এর সংশোধন সমীচীন ও প্রয়োজনীয়;</p><p>সেহেতু এতদ্বারা নিম্নরূপ আইন করা হইলঃ-</p>",
+  "file": "https://bhumipedia.land.gov.bd/uploads/PDF/Act/%E0%A6%AA%E0%A6%B0%E0%A6%AC%E0%A6%A4%E0%A6%AF_%E0%A6%9A%E0%A6%9F%E0%A6%9F%E0%A6%97%E0%A6%B0%E0%A6%AE_%E0%A6%AD%E0%A6%AE-%E0%A6%AC%E0%A6%B0%E0%A6%A7_%E0%A6%A8%E0%A6%B7%E0%A6%AA%E0%A6%A4%E0%A6%A4_%E0%A6%95%E0%A6%AE%E0%A6%B6%E0%A6%A8_%E0%A6%86%E0%A6%87%E0%A6%A8_%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A7.pdf",
+  "cover": "https://bhumipedia.land.gov.bd/uploads/Cover/Act/%E0%A6%AA%E0%A6%B0%E0%A6%AC%E0%A6%A4%E0%A6%AF_%E0%A6%9A%E0%A6%9F%E0%A6%9F%E0%A6%97%E0%A6%B0%E0%A6%AE_%E0%A6%AD%E0%A6%AE-%E0%A6%AC%E0%A6%B0%E0%A6%A7_%E0%A6%A8%E0%A6%B7%E0%A6%AA%E0%A6%A4%E0%A6%A4_%E0%A6%95%E0%A6%AE%E0%A6%B6%E0%A6%A8_%E0%A6%86%E0%A6%87%E0%A6%A8_%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A7.pdf-cover-page.jpg",
+  "bar_code": "",
+  "created_date": "2023-10-08T14:23:39.613679+06:00"
+ },
+ {
+  "id": 838,
+  "multiple_reference_link": [
+   ""
+  ],
+  "meta_keywords": [
+   ""
+  ],
+  "sections": [],
+  "ebooks_type": "পরিপত্র",
+  "act_year": "2025",
+  "number": "৩১.০০.০০০০.০৪৬.৬৮.০০৫.১৬.১২৬",
+  "title_of_act": "",
+  "publication_date": "2025-02-19",
+  "publication_by": "গেজেট",
+  "file": "https://bhumipedia.land.gov.bd/uploads/PDF/Act/%E0%A6%95%E0%A6%B7%E0%A6%AE%E0%A6%A4_%E0%A6%85%E0%A6%B0%E0%A6%AA%E0%A6%A3.pdf",
+  "cover": "https://bhumipedia.land.gov.bd/uploads/Cover/Act/Screenshot_2026-09-24_165754.png",
+  "schedules": "<p>ভূমি মন্ত্রণালয়ের আওতাধীন মাঠ পর্যায়ে বিভাগীয় কমিশনারের কার্যালয়, জেলা প্রশাসকের কার্যালয় এবং রাজস্ব সার্কেল/উপজেলা ভূমি অফিসে কর্মরত কানুনগোদের মূল দায়িত্ব হলো মাঠ পর্যায়ে সুষ্ঠু ভূমি ব্যবস্থাপনা নিশ্চিতকরণে উর্ধ্বতন কর্তৃপক্ষকে সহায়তা প্রদান করা। কানুনগোদের যথাযথভাবে কাজে লাগানো হলে মাঠ পর্যায়ে ভূমি ব্যবস্থাপনা কার্যক্রম আরো গতিশীল হবে। মাঠ পর্যায়ে সুষ্ঠু ভূমি ব্যবস্থাপনা নিশ্চিতকরণের লক্ষ্যে ভূমি সংস্কার বোর্ডের ১৮/০৪/১৯৯০ তারিখের ভূঃম::বো:৪/১প-২৩/৯০/২৩৫ (১০৬৪) নম্বর পরিপত্র সংশোধনপূর্বক মন্ত্রণালয় কানুনগোদের দায়-দায়িত্ব নিরূপণ করে এ পরিপত্র জারি করছে যা অবিলম্বে কার্যকর হবে।</p><p><strong>কানুনগোর প্রধান প্রধান দায়িত্ব নিম্নরূপ:</strong></p><p>(১) মাঠ পর্যায়ে সুচারু এবং সুষ্ঠু ভূমি ব্যবস্থাপনা নিশ্চিতকরণে উর্ধ্বতন কর্তৃপক্ষকে সহায়তা প্রদান।</p><p>(২) ভূমি সংস্কার কার্যক্রম বাস্তবায়নে অগ্রণী ও কার্যকরী ভূমিকা পালন।</p><p>(৩) ভূমিহীন কৃষকদের মধ্যে অগ্রাধিকার ভিত্তিতে খাসজমি বন্টনে প্রয়োজনীয় কাজ সম্পাদন।</p><p>(৪) গুচ্ছগ্রাম সৃজনে ভূমিকা পালন।</p><p>(৫) ভূমি উন্নয়ন কর ও অন্যান্য ভূমি রাজস্ব সংক্রান্ত দাবী যথাযথভাবে নির্ধারণ নিশ্চিতকরন এবং নির্ধারিত সময়ের মধ্যে আদায় নিশ্চিতকরণ।</p><p>(৬) সরকারী স্বার্থসংশ্লিষ্ট মোকদ্দমাসমূহে সরকারের স্বার্থ সংরক্ষণের আইনানুগ ব্যবস্থা নিশ্চিতকরণে সহায়তা প্রদান</p><p>(৭) বেদখলী খাসজমি ও অন্যান্য সরকারী জমি উদ্ধারে অগ্রণী ভূমিকা পালন এবং এ বিষয়টি উর্ধ্বতন কর্তৃপক্ষের নজরে এনে বিহিত ব্যবস্থা নিশ্চিতকরণ।</p><p>(৮) নিজ নিজ অধিক্ষেত্রে ভূমি উন্নয়ন কর আদায়ের ক্ষেত্রে দায়িত্বপ্রাপ্ত কর্মচারীগণ অর্পিত দায়িত্ব পালন করছেন কিনা তার সুষ্ঠু তত্ত্বাবধান এবং কোথাও কোন অনিয়ম পাওয়া গেলে তা সহকারী কমিশনার (ভূমি)'র নজরে এনে বিহিত ব্যবস্থা নিশ্চিতকরণ।</p><p>(৯) নামজারী মোকদ্দমা, খতিয়ান সংশোধন ও হালকরণে যথাযথ পরীক্ষা/তদন্ত সমাপনান্তে এ সব বিষয়ের উপর আইনানুগ ব্যক্তিগত মন্তব্যসহ কেসসমূহ সহকারী কমিশনার (ভূমি) বরাবর উপস্থাপন।</p><p>(১০) সম্পত্তি হস্তান্তর আইন ১৮৮৫ তে বর্ণিত বিধানসমূহ পরিপূর্ণ প্রতিপালন।</p><p>(১১) যে সকল সরকারী সম্পত্তি ১৯৫০ সনের পূর্ববঙ্গ জমিদারী উচ্ছেদ এবং প্রজাস্বত্ব আইন কার্যকরী হবার পর নিজ নিজ অধিক্ষেত্রে হস্তান্তরিত হয়েছে তার যথাযথ পরীক্ষা এবং হস্তান্তর অবৈধ/ত্রুটিপূর্ণ প্রতীয়মান হলে সহকারী কমিশনার (ভূমি) এর নজরে এনে যথাযথ ব্যবস্থা গ্রহণে সহায়তা প্রদান।</p><p>(১২) স্বত্বলিপি প্রণয়ন ও সংরক্ষণে সহকারী কমিশনার (ভূমি) কে পরামর্শ প্রদানসহ প্রয়োজনীয় ব্যবস্থা গ্রহণে সার্বিক সহযোগিতা প্রদান।</p><p>(১৩) জেগে উঠা চরের উপর প্রয়োজনীয় ব্যবস্থা/আইনানুগ ব্যবস্থা গ্রহণে সহকারী কমিশনার (ভূমি) বরাবর বিষয়টি উপস্থাপনসহ আইনানুগ নিষ্পত্তিতে সহায়তা প্রদান।</p><p>(১৪) অযথা ক্ষুদ্র চাষীদের/প্রান্তিক চাষীদের উপর যাতে অত্যাচার না হয় তার নিশ্চয়তা বিধানে সহকারী কমিশনার (ভূমি) কে সহায়তা প্রদান।</p><p>(১৫) অধিক্ষেত্রের আওতাধীন অর্পিত সম্পত্তি, পরিত্যক্ত সম্পত্তি, ওয়াকফ ও দেবোত্তর সম্পত্তির তালিকা সংরক্ষণে এবং এ সম্পত্তি থেকে সরকারী প্রাপ্য আদায় নিশ্চিতকরণে উর্ধ্বতন কর্তৃপক্ষকে সহায়তা প্রদান।</p><p>(১৬) ইউনিয়ন/পৌর ভূমি অফিস পরিদর্শন এবং ইউনিয়ন ভূমি সহকারী/উপসহকারী কর্মকর্তা কর্তৃক সম্পাদিত সকল অনলাইন কার্যক্রম তদারকি।</p><p>(১৭) বর্গা আইন বাস্তবায়নে উর্ধ্বতন কর্তৃপক্ষকে সহায়তা প্রদান।</p><p>(১৮) ইউনিয়ন/পৌর ভূমি অফিসসমূহের অনলাইন/অফলাইন আদায় পরীক্ষণ ও নিরীক্ষণ এবং যথাযথভাবে সরকারী আদায় সরকারী কোষাগারে জমাকরণ নিশ্চিতকরণ।</p><p>(১৯) ভূমি উন্নয়ন কর, অন্যান্য সরকারী দাবী আদায়ের লক্ষ্যে ব্যাপক প্রচারণার ব্যবস্থা।</p><p>(২০) ইউনিয়ন ভূমি সহকারী কর্মকর্তা/ইউনিয়ন ভূমি উপ-সহকারী কর্মকর্তা কর্তৃক প্রণীত দাবী (বকেয়া ও হাল) পরীক্ষা এবং এর যথার্থতা প্রত্যয়ন, তামাদি দাবী নির্ধারণ এবং দায় অর্পণ, ইউনিয়ন ভূমি সহকারী কর্মকর্তা/ইউনিয়ন ভূমি উপ-সহকারী কর্মকর্তা প্রণীত তালিকা প্রত্যক্ষকরণসহ মন্তব্য।</p><p>(২১) উপজেলা ভূমি অফিসের সকল নথিতে মতামত প্রদান করে সহকারী কমিশনার (ভূমি) বরাবরে আইনানুগ কার্যকারিতার জন্য উপস্থাপন।</p><p>(২২) ভূমি মন্ত্রণালয়ের ২৫/০৫/২০১৭ তারিখের ৩১.০০.০০০০.০৪৬.৬৮.০৩৯.১২.৪৪৮ নম্বর অফিস আদেশ অনুযায়ী সার্ভেয়ার কর্তৃক সম্পাদিত সকল কার্যক্রম সম্পর্কীত নথি যথাযথভাবে পরীক্ষাপূর্বক কর্তৃপক্ষের নিকট উপস্থাপন।</p><p>(২৩) উর্ধ্বতন কর্তৃপক্ষ কর্তৃক দেয় অন্যান্য দায়িত্ব পালন।</p><p>(২৪) এ সমস্ত দায়িত্ব যাতে সঠিকভাবে পালন নিশ্চিত হয় তা সহকারী কমিশনার (ভূমি)/উর্ধ্বতন কর্তৃপক্ষকে নিশ্চিত করতে হবে।</p><p><strong>নম্বর-৩১.০০.০০০০.০৪৬.৬৮.০১৭.১৬.৪৫১ (৮০)</strong></p><p><strong>তারিখ:</strong></p><p>১৬ আশ্বিন ১৪৩০ বঙ্গাব্দ</p><p>০১ অক্টোবর ২০২৩ খ্রিষ্টাব্দ</p><p><strong>অনুলিপি:</strong></p><p>০১। চেয়ারম্যান, ভূমি সংস্কার বোর্ড/ভূমি আপীল বোর্ড, ঢাকা।</p><p>০২। মহাপরিচালক, ভূমি রেকর্ড ও জরিপ অধিদপ্তর, ঢাকা।</p><p>০৩। বিভাগীয় কমিশনার, .... (সকল)।</p><p>০৪। অতিরিক্ত সচিব (মাঠ প্রশাসন), ভূমি মন্ত্রণালয়, বাংলাদেশ সচিবালয়, ঢাকা।</p><p>০৫। জেলা প্রশাসক, .... (সকল)।</p><p>০৬। মাননীয় মন্ত্রীর একান্ত সচিব, ভূমি মন্ত্রণালয়, বাংলাদেশ সচিবালয়, ঢাকা।</p><p>০৭। সচিব মহোদয়ের একান্ত সচিব, ভূমি মন্ত্রণালয়, বাংলাদেশ সচিবালয়, ঢাকা।</p><p>০৮। সিস্টেম এনালিস্ট, ভূমি মন্ত্রণালয় (পত্রটি ভূমি মন্ত্রণালয়ের ওয়েব সাইটে প্রকাশের অনুরোধসহ)।</p><p>০৯। অফিস কপি/মাস্টার কপি।</p><p>&nbsp;</p><p>&nbsp;</p>",
+  "bar_code": "",
+  "created_at_bn": "০৬ ফাল্গুন ১৪৩১ বঙ্গাব্দ  ",
+  "created_at_en": " ১৯ ফেব্রুয়ারি ২০২৫ খ্রি.",
+  "applicable_date_bn": "০৬ ফাল্গুন ১৪৩১ বঙ্গাব্দ ",
+  "applicable_date_en": "  ১৯ ফেব্রুয়ারি ২০২৫ খ্রি.",
+  "heading": "",
+  "branch": "মাঠ প্রশাসন-১",
+  "sub_branch": "",
+  "signature_position": "সিনিয়র সচিব",
+  "signature_by": "এ এস এম সালেহ আহমেদ",
+  "created_by": "",
+  "copy_to": "",
+  "footer": "",
+  "created_date": "2026-09-24T16:58:39.141850+06:00"
+ },
+ {
+  "id": 291,
+  "meta_keywords": [
+   "ই-মিউটেশন প্রক্রিয়ায় প্রণীত"
+  ],
+  "sections": [],
+  "ebooks_type": "পরিপত্র",
+  "act_year": "২০২২",
+  "number": "৩১.০০.০০০০.০৫৭.৩১.০০২.২২.৭",
+  "title_of_act": "ই-মিউটেশন প্রক্রিয়ায় প্রণীত খতিয়ান ও ডিসিআর এর নতুন ফরমেটে কিউআর কোড সংযুক্তকরণ।",
+  "publication_date": "2022-07-18",
+  "publication_by": "নন-গেজেট",
+  "file": "https://bhumipedia.land.gov.bd/uploads/PDF/Act/All_circular_-1-13_tWwKQw0.pdf",
+  "cover": "https://bhumipedia.land.gov.bd/uploads/Cover/Act/Screenshot_2025-01-26_104614.png",
+  "schedules": "<p>ভূমিসেবা জনবান্ধব করার প্রত্যয়ে ভূমির সকল সেবাকে ডিজিটাইজড করা হচ্ছে। তারই আলোকে ই-মিউটেশন প্রক্রিয়ায় প্রণীত খতিয়ান ও ডিসিআর এর<br>নতুন ফরমেটে কিউআর কোড (Quick Response Code) সংযুক্ত করা হয়েছে।<br>২। কিউআর কোডযুক্ত ডিসিআর ও খতিয়ান ম্যানুয়াল পদ্ধতিতে প্রদত্ত ডিসিআর-এর সমতুল্য এবং আইনগতভাবে বৈধ ও সর্বক্ষেত্রে গ্রহণযোগ্য ও ব্যবহারোপযোগী হবে।<br>৩।কিউ আর কোডযুক্ত ডিসি আর ও খতিয়ান প্রাপ্তির পর ভূমি অফিস থেকে ম্যানুয়াল ডিসিআর/খতিয়ান সংগ্রহ করার প্রয়োজনীয়তা নেই ।<br>৪। কিউআর কোডযুক্ত অনলাইন ডিসিআর এবং কিউআর কোডযুক্ত অনলাইন খতিয়ানের সঠিকতা যাচাইয়ের জন্য কিউআর (QR) কোডটি স্ক্যান করে ভূমি মন্ত্রণালয়ের ই-নামজারি ওয়েবসাইটে (https://mutation.land.gov.bd/) যাচাই করা যাবে।<br>৫। কিউআর কোডযুক্ত ডিসিআর ও খতিয়ানে সহকারী কমিশনার (ভূমি) বা নাজিরের ম্যানুয়াল কোন স্বাক্ষরের প্রয়োজন নেই।<br>৬। জনস্বার্থে এ আদেশ জারি করা হলো এবং অবিলম্বে এ আদেশ কার্যকর হবে।<br>&nbsp;</p>",
+  "created_at_bn": "৩ শ্রাবণ ১৪২৯",
+  "created_at_en": "১৮ জুলাই ২০২২",
+  "applicable_date_bn": "৩ শ্রাবণ ১৪২৯",
+  "applicable_date_en": "১৮ জুলাই ২০২২",
+  "heading": "গণপ্রজাতন্ত্রী বাংলাদেশ সরকার",
+  "branch": "",
+  "sub_branch": "ভূমিসেবা ডিজিটাইজেশন মনিটরিং সেল",
+  "signature_position": "সচিব",
+  "signature_by": "মোঃ মোস্তাফিজুর রহমান. পিএএ",
+  "created_by": "ভূমি মন্ত্রণালয়",
+  "copy_to": "বিতরণ",
+  "footer": "<p>১) মন্ত্রিপরিষদ সচিব (রুটিন দায়িত্ব), মন্ত্রিপরিষদ বিভাগ<br>২) প্রধানমন্ত্রীর মুখ্য সচিব, প্রধানমন্ত্রীর কার্যালয়<br>&nbsp;</p>",
+  "created_date": "2025-01-26T10:49:11.501477+06:00"
+ },
+ {
+  "id": 633,
+  "multiple_reference_link": [
+   "Fuga Est id itaque "
+  ],
+  "meta_keywords": [
+   "Sunt ipsum reprehen"
+  ],
+  "sections": [],
+  "ebooks_type": "আইন",
+  "act_year": "1992",
+  "number": "Aliquid nulla in eos",
+  "title_of_act": "test-6-1",
+  "publication_date": "1992-09-12",
+  "publication_by": "",
+  "proposal": "",
+  "objective": "",
+  "bar_code": "Cupidatat a dolorem ",
+  "created_at_bn": "Pariatur Quasi volu",
+  "created_at_en": "Fugiat fugiat persp",
+  "applicable_date_bn": "Perferendis rem volu",
+  "applicable_date_en": "Dolorum autem quam n",
+  "heading": "Expedita molestiae v",
+  "branch": "Eu quod mollitia rep",
+  "sub_branch": "Non dolores iusto im",
+  "signature_position": "Consequat Dignissim",
+  "signature_by": "Culpa harum id magna",
+  "created_by": "Quo nostrum hic ipsa",
+  "copy_to": "Totam delectus solu",
+  "footer": "",
+  "created_date": "2025-11-06T17:06:38.310665+06:00"
+ }
+]

@@ -1,0 +1,26 @@
+// Curated evaluation set. Questions are paraphrased the way citizens ask; every expected id was verified by reading the record (sync of 2026-09-29/30). Expected sets list ALL records that genuinely answer the question (the corpus has many near-duplicate Q&As). Empty expected_source_ids = the system should refuse.
+{"id": "c01", "question": "অনলাইনে নামজারি করলে ডিসিআর ফি কীভাবে দিতে হয়?", "expected_source_ids": ["qna_type2:24776"], "tags": ["namjari", "qna"]}
+{"id": "c02", "question": "ঘরে বসে অনলাইনে জমির খাজনা দেওয়ার উপায় কী?", "expected_source_ids": ["qna_type2:24785", "qna_type2:24786", "qna_type2:24792", "subsection:4123"], "tags": ["khajna", "qna"]}
+{"id": "c03", "question": "জরিমানা ছাড়া ভূমি উন্নয়ন কর কোন তারিখের মধ্যে পরিশোধ করতে হয়?", "expected_source_ids": ["section:1923", "section:1925"], "tags": ["khajna", "law"]}
+{"id": "c04", "question": "জাল দলিল বানিয়ে জমি দখল করলে আইনে কী শাস্তি আছে?", "expected_source_ids": ["section:1978", "section:1981"], "tags": ["land_crime", "law"]}
+{"id": "c05", "question": "অন্যের জমি জোর করে দখল করে রাখলে কী সাজা হতে পারে?", "expected_source_ids": ["section:1981"], "tags": ["land_crime", "law"]}
+{"id": "c06", "question": "জেলা প্রশাসকের অনুমতি ছাড়া কৃষিজমির উপরের মাটি কেটে বিক্রি করা কি অপরাধ?", "expected_source_ids": ["section:1988"], "tags": ["land_crime", "law"]}
+{"id": "c07", "question": "আইন অনুযায়ী কৃষিভূমি বলতে কী বোঝায়?", "expected_source_ids": ["subsection:4318", "subsection:4095", "subsection:4167"], "tags": ["definition", "law"]}
+{"id": "c08", "question": "খতিয়ান জিনিসটা আসলে কী?", "expected_source_ids": ["qna_type1:1", "qna_type1:56", "qna_type1:95", "qna_type1:138", "qna_type1:141", "qna_type1:184", "qna_type1:206"], "tags": ["definition", "qna"]}
+{"id": "c09", "question": "দাখিলা মানে কী?", "expected_source_ids": ["qna_type1:77", "qna_type1:119", "qna_type1:165", "qna_type1:216"], "tags": ["definition", "qna"]}
+{"id": "c10", "question": "উত্তরাধিকারী বা ওয়ারিশ বলতে কাদের বোঝানো হয়?", "expected_source_ids": ["qna_type1:66", "qna_type1:106", "qna_type1:152", "qna_type1:226"], "tags": ["definition", "qna"]}
+{"id": "c11", "question": "জমির হোল্ডিং নম্বর কী জিনিস?", "expected_source_ids": ["qna_type1:89", "qna_type1:90", "qna_type1:91", "qna_type1:131"], "tags": ["definition", "qna"]}
+{"id": "c12", "question": "মৌজা ম্যাপ সংগ্রহ করতে হলে কোথায় আবেদন করব?", "expected_source_ids": ["qna_type2:25013", "qna_type2:25286", "qna_type2:25320", "qna_type2:25396", "qna_type2:25446", "qna_type2:25182"], "tags": ["mouja_map", "qna"]}
+{"id": "c13", "question": "নামজারি আবেদনের জন্য কোন কোন কাগজপত্র জমা দিতে হয়?", "expected_source_ids": ["qna_type2:24933", "qna_type2:24953", "qna_type2:25295", "qna_type2:25368", "qna_type2:25699", "qna_type2:24884"], "tags": ["namjari", "qna"]}
+{"id": "c14", "question": "অনলাইনে জমা-খারিজ করতে মোট খরচ কত পড়ে?", "expected_source_ids": ["qna_type2:24881", "qna_type2:25046", "qna_type2:25285"], "tags": ["namjari", "fee", "qna"]}
+{"id": "c15", "question": "ভুলভাবে হওয়া নামজারি বাতিল করার পদ্ধতি কী?", "expected_source_ids": ["qna_type2:25508"], "tags": ["namjari", "qna"]}
+{"id": "c16", "question": "সরকারি খাস জমি কি কোনো ব্যক্তির নামে রেকর্ড হতে পারে?", "expected_source_ids": ["qna_type1:16"], "tags": ["khas", "qna"]}
+{"id": "c17", "question": "বিদেশে থাকা প্রবাসী কি দেশে জমি রেজিস্ট্রি করতে পারবেন?", "expected_source_ids": ["qna_type2:25645"], "tags": ["registration", "qna"]}
+{"id": "c18", "question": "পুরো টাকা নেওয়ার পরও বিক্রেতা জমির দখল বুঝিয়ে না দিলে আইনে কী প্রতিকার আছে?", "expected_source_ids": ["section:1984"], "tags": ["land_crime", "law"]}
+{"id": "c19", "question": "নিজের কৃষিজমিতে বসতবাড়ি বানাতে কি অনুমতি নিতে হয়?", "expected_source_ids": ["section:2020"], "tags": ["agri_land", "law"]}
+{"id": "c20", "question": "ই-মিউটেশনে তৈরি খতিয়ান ও ডিসিআরে কিউআর কোড যুক্ত করা নিয়ে কোনো পরিপত্র আছে কি?", "expected_source_ids": ["ebook:291"], "tags": ["circular"]}
+{"id": "c21", "question": "What is the punishment for land fraud under the law?", "expected_source_ids": ["section:1977", "section:1978"], "tags": ["land_crime", "law", "english"]}
+{"id": "u01", "question": "মঙ্গল গ্রহে জমি কেনার নিয়ম কী?", "expected_source_ids": [], "tags": ["unanswerable"]}
+{"id": "u02", "question": "আজ ঢাকার আবহাওয়া কেমন থাকবে?", "expected_source_ids": [], "tags": ["unanswerable"]}
+{"id": "u03", "question": "বিশ্বকাপ ক্রিকেটে সবচেয়ে বেশি রান কার?", "expected_source_ids": [], "tags": ["unanswerable"]}
+{"id": "u04", "question": "২০৩৫ সালে ভূমি উন্নয়ন করের হার কত হবে?", "expected_source_ids": [], "tags": ["unanswerable", "near_domain"]}
