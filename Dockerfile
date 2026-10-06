@@ -22,6 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 COPY alembic.ini ./
 COPY app ./app
+COPY frontend ./frontend
 COPY evaluation ./evaluation
 # Prebuilt index: the worker imports it into an empty database instead of re-indexing.
 COPY seed ./seed

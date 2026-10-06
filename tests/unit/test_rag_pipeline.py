@@ -112,6 +112,12 @@ async def test_smalltalk_skips_retrieval():
     assert r.route == "smalltalk" and p.searcher.calls == 0 and llm.messages is None
 
 
+async def test_salam_gets_wa_alaikum_reply():
+    p, _ = _pipeline([_doc(1)], "x")
+    r = await p.answer("আসসালামু আলাইকুম")
+    assert r.answer.startswith("ওয়া আলাইকুম আসসালাম, আমি ভূমিপিডিয়া সহায়ক।") and p.searcher.calls == 0
+
+
 async def test_english_question_gets_english_refusal():
     p, _ = _pipeline([], "x")
     r = await p.answer("What is the fee for mutation on the moon?")

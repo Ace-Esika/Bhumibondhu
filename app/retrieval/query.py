@@ -21,11 +21,14 @@ _SECTION_RE = re.compile(
 )
 _YEAR_RE = re.compile(r"(?<!\d)(1[89]\d\d|20\d\d)(?!\d)")
 
-_GREETING_RE = re.compile(
-    r"^\s*(হ্যালো|হাই|হেলো|আসসালামু আলাইকুম|সালাম|নমস্কার|শুভ (সকাল|সন্ধ্যা)|ধন্যবাদ|hi|hello|hey|thanks|thank you)"
-    r"[\s!.,।?]*$",
-    re.IGNORECASE,
-)
+_SALAM = (r"(আস+ালামু?\s*আলাইকুম|আসসালামুআলাইকুম|assalamu?\s*(o\s*)?alaikum|assalamualaikum|salam|সালাম"
+          r"|ওয়া\s*আলাইকুম\s*আস+ালাম|ওয়ালাইকুম\s*আস+ালাম)")
+_THANKS = r"(ধন্যবাদ|শুক্রিয়া|thanks|thank you)"
+_HELLO = (r"(হ্যালো|হাই|হেলো|নমস্কার|শুভ\s*(সকাল|সন্ধ্যা|দুপুর|অপরাহ্ন)|সুপ্রভাত|hi|hello|hey"
+          r"|good\s*(morning|afternoon|evening))")
+_GREETING_RE = re.compile(rf"^\s*({_SALAM}|{_THANKS}|{_HELLO})[\s!.,।?]*$", re.IGNORECASE)
+_SALAM_RE = re.compile(rf"^\s*{_SALAM}", re.IGNORECASE)
+_THANKS_RE = re.compile(rf"^\s*{_THANKS}", re.IGNORECASE)
 _COUNT_RE = re.compile(r"(কতটি|কয়টি|কতগুলো|কতগুলি|কত সংখ্যক|মোট কত|সংখ্যা কত|how many|number of|count)",
                        re.IGNORECASE)
 _LIST_TYPES = {
@@ -124,6 +127,7 @@ def analyze_query(raw: str) -> AnalyzedQuery:
     q.wants_detail = bool(_DETAIL_RE.search(text)) or q.wants_all_sections
     if _GREETING_RE.match(text):
         q.route = QueryRoute.SMALLTALK
+        q.structured = {"greeting": "salam" if _SALAM_RE.match(text) else "thanks" if _THANKS_RE.match(text) else "hello"}
     elif _COUNT_RE.search(text):
         lowered = text.lower()
         # Longest match first so "রাষ্ট্রপতির আদেশ" wins over shorter words.

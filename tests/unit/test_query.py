@@ -26,6 +26,11 @@ def test_routes():
     assert analyze_query("How many circulars are there?").structured["doc_type"] == "পরিপত্র"
     assert analyze_query("হ্যালো").route == QueryRoute.SMALLTALK
     assert analyze_query("ধন্যবাদ!").route == QueryRoute.SMALLTALK
+    for salam in ("আসসালামু আলাইকুম", "আসসালামু আলাইকুম!", "assalamu alaikum", "সালাম"):
+        q = analyze_query(salam)
+        assert q.route == QueryRoute.SMALLTALK and q.structured == {"greeting": "salam"}
+    assert analyze_query("ধন্যবাদ").structured == {"greeting": "thanks"}
+    assert analyze_query("হ্যালো").structured == {"greeting": "hello"}
     # a count question about something without structured data stays RAG
     assert analyze_query("নামজারিতে কত টাকা লাগে").route == QueryRoute.RAG
 

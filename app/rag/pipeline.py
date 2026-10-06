@@ -32,6 +32,7 @@ from app.llm.prompts import (
     REFUSAL_BN,
     REFUSAL_EN,
     SMALLTALK_BN,
+    SMALLTALK_REPLIES_BN,
     TRUNCATION_NOTE_BN,
 )
 from app.rag.citation import authority_label, build_source, extract_citations, section_label
@@ -197,7 +198,7 @@ class RAGPipeline:
             log.info("possible prompt-injection attempt in user message")
 
         if q.route == QueryRoute.SMALLTALK:
-            return ChatResult(answer=SMALLTALK_BN, sources=[], route=q.route.value, grounded=True, query=q.text,
+            return ChatResult(answer=SMALLTALK_REPLIES_BN.get(q.structured.get("greeting"), SMALLTALK_BN), sources=[], route=q.route.value, grounded=True, query=q.text,
                               results_count=0, conversation_id=conversation_id)
 
         if q.route == QueryRoute.STRUCTURED and (filters is None or filters.is_empty()):

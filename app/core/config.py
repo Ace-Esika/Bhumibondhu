@@ -161,6 +161,9 @@ class Settings(BaseSettings):
     rate_limit_per_minute: int = 20
     admin_rate_limit_per_minute: int = 10
     max_message_chars: int = 1000
+    suggest_limit: int = 5  # type-ahead suggestions returned
+    suggest_min_similarity: float = 0.55  # BGE-M3 cosine floor for semantic suggestions
+    suggest_rate_limit_per_minute: int = 120  # fires per keystroke (debounced client-side)
     request_timeout_seconds: float = 90.0
     trust_forwarded_for: bool = False  # only behind a trusted reverse proxy
 

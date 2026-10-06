@@ -5,14 +5,16 @@ from __future__ import annotations
 import asyncio
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.middleware import BodySizeLimitMiddleware, RequestContextMiddleware
-from app.api.routes import admin, chat, health, search
+from app.api.routes import admin, chat, health, search, suggest
 from app.core.cache import close_redis
 from app.core.config import get_settings
 from app.core.logging import configure_logging
@@ -20,6 +22,7 @@ from app.db.database import dispose_engine
 from app.llm.base import LLMError
 from app.rag.guardrails import InvalidInput
 from app.rag.pipeline import RAGPipeline
+from app.retrieval.suggest import SuggestionIndex
 
 log = logging.getLogger(__name__)
 
@@ -44,9 +47,22 @@ def create_app(pipeline: RAGPipeline | None = None, warmup: bool = True) -> Fast
                     await asyncio.to_thread(p.searcher.reranker.score, "উষ্ণকরণ", ["উষ্ণকরণ"])
             except Exception:
                 log.exception("model warm-up failed; /ready will report not_ready")
+        app.state.suggestions = SuggestionIndex(settings, app.state.pipeline.searcher.embedder)
+        build_task = None
+        if warmup:
+            # Background: until it finishes, suggestions fall back to text matching.
+            async def _build_suggestions() -> None:
+                try:
+                    await asyncio.to_thread(app.state.suggestions.build)
+                except Exception:
+                    log.exception("suggestion index build failed; suggestions use text matching only")
+
+            build_task = asyncio.create_task(_build_suggestions())
         if not settings.groq_configured:
             log.warning("GROQ_API_KEY/GROQ_MODEL not set: /api/chat will return 503; /api/search works")
         yield
+        if build_task is not None:
+            build_task.cancel()
         await close_redis()
         await dispose_engine()
 
@@ -87,7 +103,12 @@ def create_app(pipeline: RAGPipeline | None = None, warmup: bool = True) -> Fast
     app.include_router(health.router)
     app.include_router(chat.router)
     app.include_router(search.router)
+    app.include_router(suggest.router)
     app.include_router(admin.router)
+    # Chat UI (./frontend) at / , mounted last so API routes take precedence.
+    frontend = Path(__file__).resolve().parents[1] / "frontend"
+    if frontend.is_dir():
+        app.mount("/", StaticFiles(directory=frontend, html=True), name="frontend")
     return app
 
 

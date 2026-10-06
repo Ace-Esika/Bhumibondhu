@@ -99,8 +99,14 @@ ANSWER_PROMPT = ChatPromptTemplate.from_messages([("system", SYSTEM_PROMPT), ("h
 REFUSAL_BN = ("আমি প্রদত্ত সরকারি উৎসসমূহে (ভূমিপিডিয়া) এই প্রশ্নের নির্ভরযোগ্য তথ্য খুঁজে পাইনি। "
               "অনুগ্রহ করে প্রশ্নটি আরও নির্দিষ্ট করে লিখুন, অথবা ভূমি সেবা হেল্পলাইন বা সংশ্লিষ্ট ভূমি অফিসে যোগাযোগ করুন।")
 REFUSAL_EN = ("I don't have sufficient information in the available Bhumipedia sources to answer this reliably.")
-SMALLTALK_BN = ("আমি ভূমিপিডিয়া সহায়ক। ভূমি আইন, নামজারি, খতিয়ান, ভূমি উন্নয়ন কর ইত্যাদি বিষয়ে প্রশ্ন করুন — "
-                "আমি সরকারি উৎস থেকে সূত্রসহ উত্তর দেওয়ার চেষ্টা করব।")
+_INTRO_BN = ("আমি ভূমিপিডিয়া সহায়ক। ভূমি আইন, নামজারি, খতিয়ান, ভূমি উন্নয়ন কর ইত্যাদি বিষয়ে প্রশ্ন করুন, "
+             "আমি সরকারি উৎস থেকে সূত্রসহ উত্তর দেওয়ার চেষ্টা করব।")
+SMALLTALK_BN = _INTRO_BN
+SMALLTALK_REPLIES_BN = {
+    "salam": "ওয়া আলাইকুম আসসালাম, " + _INTRO_BN,
+    "thanks": "আপনাকে স্বাগতম! ভূমি সংক্রান্ত আর কোনো প্রশ্ন থাকলে নির্দ্বিধায় জিজ্ঞাসা করুন।",
+    "hello": "স্বাগতম! " + _INTRO_BN,
+}
 
 
 # Earlier turns, shown ONLY to resolve references ("এর ফি কত?"). Not evidence.

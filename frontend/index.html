@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ভূমিবন্ধু – ভূমিপিডিয়া সহকারী</title>
+<meta name="description" content="ভূমি আইন, নীতিমালা ও ভূমি সেবা বিষয়ে ভূমিপিডিয়া-ভিত্তিক নির্ভরযোগ্য উত্তর।">
+<meta name="theme-color" content="#0f6e5a">
+<script>try{var t=localStorage.getItem("bhumibondhu.theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preload" href="assets/fonts/NikoshBAN.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo"><img src="assets/bot.png" alt="ভূমিবন্ধু" width="40" height="40"></span>
+      <div class="brand-text">
+        <h1>ভূমিবন্ধু</h1>
+        <p>ভূমিপিডিয়া-ভিত্তিক তথ্য সহকারী</p>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="status" id="status" title="সংযোগের অবস্থা"><i></i><span>অনলাইন</span></span>
+      <button class="btn ghost icon theme" id="theme" type="button" aria-label="ডার্ক মোড চালু করুন" title="থিম পরিবর্তন">
+        <svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.500" fill="currentColor"/><path d="M12 2.500v2.500M12 19v2.500M2.500 12H5M19 12h2.500M5.300 5.300l1.800 1.800M16.900 16.900l1.800 1.800M5.300 18.700l1.800-1.800M16.900 7.100l1.800-1.800" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20.500 14.500A8.500 8.500 0 019.500 3.500a8.500 8.500 0 1011 11z" fill="currentColor"/></svg>
+      </button>
+      <button class="btn ghost" id="newChat" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>নতুন আলাপ</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="chat" id="chat" aria-live="polite">
+    <section class="welcome" id="welcome">
+      <div class="welcome-mark"><img src="assets/bot.png" alt="ভূমিবন্ধু" width="112" height="112"></div>
+      <h2>ভূমি সংক্রান্ত যাবতীয় তথ্য, এখন আপনার সন্নিকটে</h2>
+      <p>আমি <strong>ভূমিবন্ধু</strong>। আইন, বিধিমালা, নীতিমালা, পরিপত্র ও ভূমি সেবা সম্পর্কে ভূমিপিডিয়ার তথ্যের ভিত্তিতে, সূত্রসহ উত্তর দিই।</p>
+      <div class="suggest" id="suggest">
+        <button type="button" data-q="নামজারি করতে কী কী কাগজপত্র লাগে?"><b>নামজারি</b><span>নামজারি করতে কী কী কাগজপত্র লাগে?</span></button>
+        <button type="button" data-q="জাল দলিল করলে কী শাস্তি?"><b>আইন ও শাস্তি</b><span>জাল দলিল করলে কী শাস্তি?</span></button>
+        <button type="button" data-q="মৌজা ম্যাপ কিভাবে পাব?"><b>ম্যাপ ও খতিয়ান</b><span>মৌজা ম্যাপ কিভাবে পাব?</span></button>
+        <button type="button" data-q="ভূমি উন্নয়ন কর কীভাবে অনলাইনে পরিশোধ করব?"><b>ভূমি উন্নয়ন কর</b><span>ভূমি উন্নয়ন কর কীভাবে অনলাইনে পরিশোধ করব?</span></button>
+      </div>
+    </section>
+    <div class="thread" id="thread"></div>
+  </main>
+
+  <footer class="composer-wrap">
+    <ul class="typeahead" id="typeahead" role="listbox" aria-label="সম্ভাব্য প্রশ্ন" hidden></ul>
+    <form class="composer" id="form" autocomplete="off">
+      <textarea id="input" rows="1" maxlength="4000" placeholder="আপনার প্রশ্ন লিখুন…" aria-label="আপনার প্রশ্ন" role="combobox" aria-expanded="false" aria-controls="typeahead" aria-autocomplete="list"></textarea>
+      <button class="send" id="send" type="submit" aria-label="পাঠান" disabled>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12l16-8-6 16-2.500-6.500L4 12z" fill="currentColor"/></svg>
+      </button>
+    </form>
+    <p class="note">ভূমিবন্ধু শুধুমাত্র ভূমিপিডিয়ার তথ্যসূত্র থেকে উত্তর দেয়। আইনি সিদ্ধান্তের আগে অনুগ্রহ করে সংশ্লিষ্ট ভূমি অফিস বা আইনজীবীর পরামর্শ নিন।</p>
+  </footer>
+</div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
