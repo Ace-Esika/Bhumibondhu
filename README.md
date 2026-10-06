@@ -411,6 +411,7 @@ hashing embedder. No test calls Groq.
 python -m app.cli evaluate evaluation/curated.jsonl --output reports/curated.json
 python -m app.cli evaluate evaluation/curated.jsonl --generate --delay 20   # + citation checks via Groq (delay: free-tier rate limits)
 python -m app.cli build-eval-set evaluation/self.jsonl && python -m app.cli evaluate evaluation/self.jsonl
+python -m app.cli evaluate evaluation/hierarchy.jsonl   # section / subsection / passage questions (element-level ids)
 ```
 
 * `evaluation/curated.jsonl` contains 25 citizen-style paraphrased questions. Every expected
@@ -483,6 +484,30 @@ What changed because of these measurements:
   (found by an integration test).
 * **Bengali spelling variants were canonicalized (নম্বর/নাম্বার/নং, …), and definition
   queries ("বলতে কী বোঝায়") also search `সংজ্ঞা`.**
+
+### Hierarchy-aware retrieval (2026-10-06)
+
+`evaluation/hierarchy.jsonl` (200 questions, `python -m app.cli build-eval-set evaluation/hierarchy.jsonl
+--hierarchy`) names a position in the act → section → subsection tree, and the expected id is that
+exact element. Before/after on the same index (no reranker):
+
+| Question type | n | Hit@5 before → after | MRR before → after |
+|---|---|---|---|
+| "<act> এর ধারা N" | 50 | 0.88 → **1.00** | 0.86 → **0.98** |
+| "<act> এর ধারা N এর উপ-ধারা k" | 50 | 0.68 → **0.96** | 0.47 → **0.90** |
+| act + section heading | 50 | 0.96 → 0.98 | 0.82 → 0.83 |
+| opening words of a provision | 50 | 0.92 → 0.94 | 0.71 → 0.82 |
+| **all** | 200 | 0.86 → **0.97** | 0.71 → **0.88** |
+
+The curated set is unchanged (Hit@5 0.905, MRR 0.850) and the self-retrieval set improved
+(MRR 0.843 → 0.884). On a separate chunk-level check (Hit@1, same index): "act + ধারা N"
+0.85 → 0.98 and "+ উপ-ধারা k" 0.10 → 0.93. What caused the old failures: the year in a query
+was a hard filter against `act_year` (which disagrees with the title year for 10 of 153 acts),
+the subsection number was never parsed, and acts were picked by the section heading's length.
+Passages inside manuals improved little (Hit@1 0.44 → 0.46): the provision-aware chunking
+mainly gives clean boundaries and labels, so those questions are best served by the reranker
+(on a 48-question subset it raised manual-passage Hit@1 from 0.33 to 0.58; enable it on a GPU).
+Fusion weights, RRF and deeper candidate lists were within noise on this set.
 
 ### Reranker (curated set; CPU)
 
