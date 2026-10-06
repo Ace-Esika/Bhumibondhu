@@ -555,4 +555,4 @@ aborted a whole benchmark run (errors are now recorded per example).
    (the latter was faster in a spot check and also resisted injection).
 5. **Load test** `/api/chat` (for example with k6) to size API replicas. On CPU, query
    embedding (~0.2 s) is the bottleneck per process.
-6. **ONNX / int8 BGE-M3** on CPU: expect roughly 2× embedding throughput; verify MRR holds.
+
