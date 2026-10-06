@@ -9,16 +9,26 @@ from enum import StrEnum
 from pydantic import BaseModel, Field, field_validator
 
 from app.core.config import SOURCE_TYPES
-from app.core.text import bn_to_ascii_digits, clean_unicode, normalize_query, query_terms
+from app.core.text import (bn_to_ascii_digits, clean_unicode, normalize_query, normalize_section_number,
+                           query_terms)
 
 # Logical source-type filter values accepted from clients (document-level types).
 FILTERABLE_SOURCE_TYPES = (*SOURCE_TYPES, "topic")
 
+_PROVISION = r"(?:ধারা|বিধি|অনুচ্ছেদ|প্রবিধান|section|rule|article|regulation)"
+# "উপ-ধারা 2" must never be read as "ধারা 2": the lookbehind skips the sub- prefix.
 _SECTION_RE = re.compile(
-    r"(?:ধারা|বিধি|অনুচ্ছেদ|প্রবিধান|section|rule|article)\s*[-–:]?\s*(\d+[ক-হ]?)"
+    rf"(?<!উপ)(?<!উপ-)(?<!sub-)(?<!sub){_PROVISION}\s*[-–:]?\s*(\d+[ক-হA-Za-z]?)(?:\s*\(\s*([০-৯0-9]+|[ক-হ])\s*\))?"
     r"|(\d+[ক-হ]?)\s*(?:নং|নম্বর|নাম্বার)?\s*(?:ধারা|বিধি|অনুচ্ছেদ)",
     re.IGNORECASE,
 )
+_SUB = r"(?:উপ-?\s*(?:ধারা|বিধি|অনুচ্ছেদ|প্রবিধান)|sub-?\s*(?:section|rule|regulation))"
+_SUBSECTION_RES = (
+    re.compile(rf"{_SUB}\s*[-–:]?\s*\(?\s*(\d+[ক-হ]?|[ক-হ]|[a-z])\s*\)?(?![ক-হ\w])", re.IGNORECASE),
+    re.compile(rf"\(?\s*(\d+[ক-হ]?|[ক-হ])\s*\)?\s*(?:নং|নম্বর)?\s*{_SUB}", re.IGNORECASE),
+)
+_CLAUSE_RE = re.compile(r"(?:দফা|clause)\s*[-–:]?\s*\(?\s*([ক-হ]|[a-z]|\d+)\s*\)?"
+                        r"|\(\s*([ক-হ])\s*\)\s*দফা", re.IGNORECASE)
 _YEAR_RE = re.compile(r"(?<!\d)(1[89]\d\d|20\d\d)(?!\d)")
 
 _SALAM = (r"(আস+ালামু?\s*আলাইকুম|আসসালামুআলাইকুম|assalamu?\s*(o\s*)?alaikum|assalamualaikum|salam|সালাম"
@@ -63,6 +73,13 @@ _ALL_SECTIONS_RE = re.compile(
     r"(পুরো|সম্পূর্ণ|পূর্ণাঙ্গ)\s*(আইন|বিধিমালা|অধ্যাদেশ|নীতিমালা)|all\s+(sections|rules|provisions))", re.IGNORECASE)
 
 
+# The question is about the act as a whole (its contents, preamble, enactment date ...), so the
+# overview / table-of-contents chunk is a legitimate answer rather than noise.
+_ACT_LEVEL_RE = re.compile(
+    r"(সূচি|সূচীপত্র|প্রস্তাবনা|উদ্দেশ্য|কোন\s*(আইন|বিধিমালা|অধ্যাদেশ|নীতিমালা)|কবে\s*(প্রণীত|জারি|প্রকাশ|কার্যকর)|"
+    r"কত\s*সালে|কত\s*নম্বর|কতটি\s*ধারা|table of contents|overview|which act|how many sections)", re.IGNORECASE)
+
+
 class QueryRoute(StrEnum):
     RAG = "rag"  # knowledge / legal question → retrieval + LLM
     STRUCTURED = "structured"  # exact factual query answerable from the database
@@ -103,28 +120,51 @@ class AnalyzedQuery:
     normalized: str  # canonical form for cache keys
     terms: list[str]  # tsquery terms
     section_number: str | None = None
+    subsection_number: str | None = None  # "উপ-ধারা (২)" → "2"
+    clause: str | None = None  # "দফা (ক)" → "ক"
     year: int | None = None
     is_definition: bool = False
     wants_detail: bool = False
     wants_all_sections: bool = False
+    wants_act_overview: bool = False
     route: QueryRoute = QueryRoute.RAG
     structured: dict = field(default_factory=dict)
+
+
+def _parse_provision(ascii_text: str) -> tuple[str | None, str | None]:
+    """(section, subsection) named by the query, both normalised like the stored values."""
+    m = _SECTION_RE.search(ascii_text)
+    section = normalize_section_number(m.group(1) or m.group(3)) if m else None
+    subsection = normalize_section_number(m.group(2)) if m and m.group(2) else None
+    if subsection is None:
+        for rx in _SUBSECTION_RES:
+            sm = rx.search(ascii_text)
+            if sm:
+                subsection = normalize_section_number(sm.group(1))
+                break
+    return section, subsection
+
+
+def _parse_clause(ascii_text: str) -> str | None:
+    m = _CLAUSE_RE.search(ascii_text)
+    return normalize_section_number(m.group(1) or m.group(2)) if m else None
 
 
 def analyze_query(raw: str) -> AnalyzedQuery:
     text = re.sub(r"\s+", " ", clean_unicode(raw)).strip()
     ascii_digits = bn_to_ascii_digits(text)
-    m = _SECTION_RE.search(ascii_digits)
-    section = (m.group(1) or m.group(2)) if m else None
+    section, subsection = _parse_provision(ascii_digits)
     ym = _YEAR_RE.search(ascii_digits)
     terms = query_terms(text)
     is_definition = bool(_DEFINITION_RE.search(text))
     if is_definition:
         terms += [t for t in DEFINITION_TERMS if t not in terms]
     q = AnalyzedQuery(raw=raw, text=text, normalized=normalize_query(text), terms=terms,
-                      section_number=section, year=int(ym.group(1)) if ym else None, is_definition=is_definition,
+                      section_number=section, subsection_number=subsection, clause=_parse_clause(ascii_digits),
+                      year=int(ym.group(1)) if ym else None, is_definition=is_definition,
                       wants_all_sections=bool(_ALL_SECTIONS_RE.search(text)))
     q.wants_detail = bool(_DETAIL_RE.search(text)) or q.wants_all_sections
+    q.wants_act_overview = q.wants_all_sections or bool(_ACT_LEVEL_RE.search(text))
     if _GREETING_RE.match(text):
         q.route = QueryRoute.SMALLTALK
         q.structured = {"greeting": "salam" if _SALAM_RE.match(text) else "thanks" if _THANKS_RE.match(text) else "hello"}

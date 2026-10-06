@@ -14,7 +14,7 @@ import hashlib
 import json
 from typing import Any
 
-PIPELINE_VERSION = "2026-09-30.3"
+PIPELINE_VERSION = "2026-10-06.1"
 
 VOLATILE_FIELDS = frozenset(
     {

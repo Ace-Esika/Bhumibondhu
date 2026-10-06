@@ -29,7 +29,7 @@ from pydantic import ConfigDict
 
 from app.core.cache import cache_get, cache_set, make_key
 from app.core.config import Settings, get_settings
-from app.core.text import normalize_query
+from app.core.text import lexical_coverage, normalize_query
 from app.db.database import get_sessionmaker
 from app.retrieval.embeddings import EmbeddingError, EmbeddingService, get_embedding_service
 from app.retrieval.query import DEFINITION_TERMS, AnalyzedQuery, SearchFilters, analyze_query
@@ -48,6 +48,7 @@ class Candidate:
     lexical_rank: int | None = None
     fused: float = 0.0
     rerank_score: float | None = None
+    exact: bool = False  # found by the structural "<act> ধারা N" lookup
     row: dict[str, Any] = field(default_factory=dict)
 
 
@@ -96,21 +97,35 @@ def fuse(vector_hits: list[Hit], lexical_hits: list[Hit], method: str, w_vec: fl
     return cands
 
 
+_OVERVIEW_ROLES = ("overview", "toc", "preamble")
+
+
 def apply_boosts(cands: list[Candidate], query: AnalyzedQuery, settings: Settings) -> None:
+    """Multiplicative post-fusion boosts.
+
+    The year in a query is deliberately NOT used here: it is usually copied from the act's
+    title, while the stored `year` comes from a separate upstream field that disagrees for
+    some records, so matching on it would punish the right act.
+    """
     for c in cands:
         authority = int(c.row.get("authority") or 0)
         boost = 1.0 + settings.authority_boost * authority / 100.0
         if query.section_number and c.row.get("section_number") == query.section_number:
-            if query.year is None or c.row.get("year") == query.year:
-                boost *= 1.0 + settings.section_match_boost
+            boost *= 1.0 + settings.section_match_boost
+        role = (c.row.get("chunk_metadata") or {}).get("role")
+        if role in _OVERVIEW_ROLES and not query.wants_act_overview:
+            # Every act has an overview chunk full of its title; it would otherwise win any
+            # query that merely names the act while asking about one of its provisions.
+            boost *= settings.overview_demotion
         c.fused *= boost
 
 
 def _title_terms(q: AnalyzedQuery) -> list[str]:
     """Query terms that can identify an act: drop the section number itself, provision words
     and definition helpers."""
-    drop = {q.section_number, "ধারা:*", "ধারা", "বিধি", "অনুচ্ছেদ:*", "প্রবিধান:*", "section", "rule", "article",
-            *DEFINITION_TERMS}
+    drop = {q.section_number, q.subsection_number, q.clause, "ধারা:*", "ধারা", "বিধি", "অনুচ্ছেদ:*", "প্রবিধান:*",
+            "section", "rule", "article", "উপ", "উপধারা", "উপধারা:*", "দফা", "নম্বর", "বলা", "বলে", "বলা:*",
+            "subsection", "clause", *DEFINITION_TERMS}
     return [t for t in q.terms if t not in drop and not t.rstrip(":*").isdigit()]
 
 
@@ -123,22 +138,8 @@ def promote_exact_matches(cands: list[Candidate], exact_ids: list[int], settings
     by_id = {c.chunk_id: c for c in cands}
     for rank, cid in enumerate(exact_ids):
         if cid in by_id:
+            by_id[cid].exact = True
             by_id[cid].fused = max(by_id[cid].fused, top * (1 + settings.section_match_boost) - rank * 1e-9)
-
-
-def lexical_coverage(terms: list[str], lexical_body: str) -> float:
-    """Fraction of query terms present in the chunk (prefix terms match as prefixes)."""
-    if not terms:
-        return 0.0
-    tokens = set(lexical_body.split())
-    hit = 0
-    for t in terms:
-        if t.endswith(":*"):
-            p = t[:-2]
-            hit += any(tok.startswith(p) for tok in tokens)
-        else:
-            hit += t in tokens
-    return hit / len(terms)
 
 
 def candidate_to_document(c: Candidate, query: AnalyzedQuery) -> Document:
@@ -155,7 +156,7 @@ def candidate_to_document(c: Candidate, query: AnalyzedQuery) -> Document:
         "context": r["context"], "content": r["content"],
         "vector_score": c.vector_score, "vector_rank": c.vector_rank, "lexical_score": c.lexical_score,
         "lexical_rank": c.lexical_rank, "fused_score": c.fused, "rerank_score": c.rerank_score,
-        "lexical_coverage": lexical_coverage(query.terms, r.get("lexical_body") or ""),
+        "lexical_coverage": lexical_coverage(query.terms, r.get("lexical_body") or ""), "exact_match": c.exact,
     }
     page = f"{r['context']}\n\n{r['content']}" if r["context"] else r["content"]
     return Document(page_content=page, metadata=meta, id=str(c.chunk_id))
@@ -201,7 +202,8 @@ class HybridSearcher:
             trace.vector_hits, trace.lexical_hits = len(vec_hits), len(lex_hits)
             exact: list[Hit] = []
             if q.section_number:
-                exact = await section_lookup(session, q.section_number, _title_terms(q), 3, filters, q.year)
+                exact = await section_lookup(session, q.section_number, _title_terms(q), 6, filters, q.year,
+                                             q.subsection_number, q.clause)
 
             cands = fuse(vec_hits, lex_hits, s.fusion_method, s.vector_weight, s.lexical_weight, s.rrf_k)
             for h in exact:

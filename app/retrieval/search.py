@@ -6,12 +6,15 @@ nothing user-supplied is ever interpolated into SQL text.
 
 from __future__ import annotations
 
+import json
+import re
 import time
 from dataclasses import dataclass
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.text import bn_to_ascii_digits, lexical_coverage, lexical_text, normalize_section_number
 from app.retrieval.query import SearchFilters
 
 
@@ -99,28 +102,79 @@ async def lexical_search(session: AsyncSession, terms: list[str], k: int,
 
 
 async def section_lookup(session: AsyncSession, section_number: str, title_terms: list[str], k: int,
-                         filters: SearchFilters | None = None, year: int | None = None) -> list[Hit]:
-    """Exact structural match for queries that name a provision ("<act> এর ধারা ৫").
+                         filters: SearchFilters | None = None, year: int | None = None,
+                         subsection: str | None = None, clause: str | None = None) -> list[Hit]:
+    """Exact structural match for queries that name a provision ("<act> এর ধারা ৫ উপ-ধারা (২)").
 
-    Returns chunks whose section_number equals the requested one AND whose act title /
-    heading matches the query's other terms, ranked by that title match. Title-less
-    requests ("ধারা ৫ কী?") are ambiguous across acts and return nothing.
+    1. Acts are ranked by how well their *document title* (not the section heading) covers the
+       query's remaining terms; the year named in the query is only a tie-breaker, because an
+       act's title year and its `act_year` field disagree for some records.
+    2. Every chunk of that provision is returned in document order, with the requested
+       subsection / clause first, so a long provision split over several chunks is still found
+       by its subsection number.
+
+    Title-less requests ("ধারা ৫ কী?") are ambiguous across acts and return nothing.
     """
     if not title_terms:
         return []
-    params: dict = {"n": section_number, "tsq": " | ".join(title_terms), "k": k}
+    params: dict = {"n": section_number}
     where = filter_clause(filters, params)
-    if year:
-        where += " AND c.year = :lookup_year"
-        params["lookup_year"] = year
     rows = (await session.execute(text(f"""
-        SELECT c.id, ts_rank_cd(to_tsvector('simple', c.lexical_title), q, 1) AS rank
-        FROM document_chunks c, to_tsquery('simple', :tsq) q
-        WHERE c.section_number = :n AND to_tsvector('simple', c.lexical_title) @@ q {where}
-        ORDER BY rank DESC, c.chunk_index
-        LIMIT :k
-    """), params)).all()
-    return [Hit(r.id, float(r.rank), i + 1) for i, r in enumerate(rows)]
+        SELECT c.id, c.document_id, c.chunk_index, c.metadata, c.content, d.title
+        FROM document_chunks c JOIN documents d ON d.id = c.document_id
+        WHERE c.section_number = :n AND d.is_active {where}
+    """), params)).mappings().all()
+    return rank_section_rows([dict(r) for r in rows], title_terms, k, year, subsection, clause)
+
+
+def rank_section_rows(rows: list[dict], title_terms: list[str], k: int, year: int | None = None,
+                      subsection: str | None = None, clause: str | None = None) -> list[Hit]:
+    """Pure ranking step of `section_lookup` (unit-testable without a database)."""
+    if not rows:
+        return []
+    year_token = str(year) if year else None
+    scores: dict[int, tuple[float, int, int]] = {}
+    for r in rows:
+        if r["document_id"] in scores:
+            continue
+        body = lexical_text(r["title"])
+        tokens = body.split()
+        scores[r["document_id"]] = (lexical_coverage(title_terms, body),
+                                    1 if year_token and year_token in tokens else 0,
+                                    -len(tokens))  # prefer the tighter title ("The X Act" over "The X Act (Repealed)")
+    best = max(scores.values())
+    if best[0] < 0.5:
+        return []
+    docs = {d for d, sc in scores.items() if sc == best}
+    if len(docs) > 2:
+        return []  # "ভূমি আইনের ধারা ৫": the title names no single act, so claiming an exact match would be a guess
+    picked = [r for r in rows if r["document_id"] in docs]
+    picked.sort(key=lambda r: (r["document_id"], _subsection_rank(r, subsection, clause), r["chunk_index"]))
+    return [Hit(r["id"], 1.0, i + 1) for i, r in enumerate(picked[: max(k, 6)])]
+
+
+def _marker(label: str) -> re.Pattern:
+    """A list marker at the start of a line: "(২)", "২)", "দফা (ক)"."""
+    return re.compile(rf"(?:^|\n)(?:উপ-)?(?:দফা\s*|তফসিল\s*)?\(?{re.escape(label)}\)", re.IGNORECASE)
+
+
+def _subsection_rank(row: dict, subsection: str | None, clause: str | None) -> int:
+    """0 = the chunk holds exactly what was asked; larger = further away. Without a subsection or
+    clause in the query every chunk of the provision ties and document order decides."""
+    if not subsection and not clause:
+        return 0
+    meta = row["metadata"] if isinstance(row["metadata"], dict) else json.loads(row["metadata"] or "{}")
+    content = bn_to_ascii_digits(row["content"])
+    # Upstream stores both উপ-ধারা "(২)" and দফা "(ক)" as subsections, so either kind of
+    # reference is checked against the chunk's recorded subsection numbers first.
+    nums = {normalize_section_number(n) for n in (meta.get("subsection_numbers") or [meta.get("subsection_number")])
+            if n}
+    rank = 0
+    if subsection and subsection not in nums:
+        rank += 1 if _marker(subsection).search(content) else 4
+    if clause and clause not in nums and not _marker(clause).search(content):
+        rank += 2
+    return rank
 
 
 async def section_chunk_ids(session: AsyncSession, document_id: int, section_number: str) -> list[int]:

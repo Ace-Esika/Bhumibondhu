@@ -57,6 +57,10 @@ def evidence_sufficient(docs: list[Document], settings: Settings, reranked: bool
     """
     if not docs:
         return False, "no_results"
+    # The user named a provision of a named act and the database has exactly that provision:
+    # nothing about the dense similarity can make it less relevant.
+    if any(d.metadata.get("exact_match") for d in docs):
+        return True, "exact_provision"
     if reranked:
         best = max((d.metadata.get("rerank_score") or 0.0) for d in docs)
         return (best >= settings.min_rerank_score, f"rerank={best:.3f}")

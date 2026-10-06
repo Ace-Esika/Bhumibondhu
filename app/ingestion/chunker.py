@@ -29,6 +29,11 @@ from app.ingestion.tokens import TokenCounter
 _SENTENCE_SPLIT = re.compile(r"(?<=[।?!؟.;])\s+")
 _TOC_MAX_ENTRIES = 400
 _LEAD_IN = "প্রারম্ভিক অংশ:"
+# "২৩। শাস্তিঃ …": Bengali digits + danda open a numbered provision in the act texts embedded in manuals.
+_PROVISION_RE = re.compile(r"^\s*([০-৯]{1,4}[ক-হ]?)\s*[।]\s*(\S.*)$")
+_MIN_PROVISIONS = 3
+_NOISE_LINES = frozenset({"আদেশক্রমে", "বিতরণ", "অনুলিপি", "সূচিপত্র", "সংযুক্তি"})
+_SIGNATURE_RE = re.compile(r"^(স্বা/-|স্বাঃ|\(?মোঃ)")
 
 
 @dataclass(frozen=True)
@@ -245,8 +250,23 @@ class Chunker:
                 return normalize_section_number(u.number), u.heading
         return None, None
 
+    @staticmethod
+    def _span(nums: list[str]) -> str:
+        nums = list(dict.fromkeys(nums))
+        return "" if not nums else nums[0] if len(nums) == 1 else f"{nums[0]}–{nums[-1]}"
+
+    @classmethod
+    def _sub_numbers(cls, units: list[Unit]) -> list[str]:
+        """Display numbers of every subsection inside `units` (recursively), in reading order."""
+        out: list[str] = []
+        for u in units:
+            if u.source_type == "subsection" and _num(u.number):
+                out.append(_num(u.number))
+            out.extend(cls._sub_numbers(u.children))
+        return out
+
     def _emit(self, doc, path: list[Unit], identity: Unit, ctx: list[str], content: str,
-              extra_meta: dict | None = None) -> Chunk:
+              extra_meta: dict | None = None, subs: list[str] | None = None) -> Chunk:
         sec_no, sec_heading = self._section_number_of(path)
         meta: dict[str, Any] = {"path": [{"type": u.source_type, "id": u.source_id,
                                           "number": _num(u.number) or None} for u in path]}
@@ -257,6 +277,11 @@ class Chunker:
         if sch is not None:
             key = "schedule_number" if schedule_label(sch) == "তফসিল" else "clause_number"
             meta[key] = _num(sch.number) or None
+        if subs:
+            # Every subsection this chunk holds (a grouped chunk holds several): lets a query for
+            # "ধারা ৫ উপ-ধারা (৩)" find the chunk by number rather than by guessing from text.
+            meta["subsection_numbers"] = list(dict.fromkeys(subs))
+            meta.setdefault("subsection_number", subs[0])
         if identity.metadata.get("note"):
             meta["note"] = identity.metadata["note"]
         if extra_meta:
@@ -277,7 +302,7 @@ class Chunker:
         budget = max(self.cfg.min_tokens * 2, self.cfg.max_tokens - ctx_tokens)
         full = self._render(unit, doc)
         if self.tok(full) <= budget:
-            return [self._emit(doc, path, unit, my_ctx, full)]
+            return [self._emit(doc, path, unit, my_ctx, full, subs=self._sub_numbers([unit]))]
 
         chunks: list[Chunk] = []
         own = self._render(Unit(unit.source_type, unit.source_id, unit.parent_source_id, unit.text,
@@ -303,13 +328,19 @@ class Chunker:
             if not group and not group_has_own:
                 return
             texts = ([own] if group_has_own else []) + [t for _, t in group]
+            # A chunk holding only some subsections says which ones, so the number is searchable.
+            group_subs = self._sub_numbers([u for u, _ in group])
+            span = self._span(group_subs)
+            tag = [f"উপ-{doc.section_label}: {span}"] if span else []
             if group_has_own:
                 identity, ids = unit, [unit.source_id] + [u.source_id for u, _ in group]
-                c = self._emit(doc, path, identity, my_ctx, "\n".join(texts))
+                c = self._emit(doc, path, identity, [*my_ctx, *tag], "\n".join(texts),
+                               subs=self._sub_numbers([u for u, _ in group]))
             else:
                 identity = group[0][0]
                 ids = [u.source_id for u, _ in group]
-                c = self._emit(doc, [*path, identity], identity, child_ctx, "\n".join(texts))
+                c = self._emit(doc, [*path, identity], identity, [*child_ctx, *tag], "\n".join(texts),
+                               subs=self._sub_numbers([u for u, _ in group]))
             if len(ids) > 1:
                 c.metadata["covers"] = ids
             chunks.append(c)
@@ -384,35 +415,105 @@ class Chunker:
     @staticmethod
     def _is_heading(line: str) -> bool:
         s = line.strip()
-        return (3 <= len(s) <= 80 and " | " not in s and not s.startswith("- ")
-                and not s.endswith(("।", ".", ",", ";", "—", ":-")) and not re.fullmatch(r"[\d০-৯().\s-]+", s))
+        return (4 <= len(s) <= 80 and " | " not in s and not s.startswith(("- ", "(", "[", "“", '"'))
+                and not s.endswith(("।", ".", ",", ";", "—", ":-", '"', "”", ")")) and s not in _NOISE_LINES
+                and not _SIGNATURE_RE.match(s) and not re.fullmatch(r"[\d০-৯().\s-]+", s)
+                and not re.match(r"[০-৯\d]+\s*[.।)]", s))
+
+    @staticmethod
+    def _provision_title(line: str) -> str:
+        """'২৩। শাস্তিঃ (১) কোন ব্যক্তি …' → '২৩। শাস্তি' : the number and the caption before the first colon."""
+        m = _PROVISION_RE.match(line)
+        if not m:
+            return line.strip()[:80]
+        caption = re.split(r"\s*[ঃ:]\s*|\s*[-–—]\s*\(|\s+\(", m.group(2), maxsplit=1)[0].strip()
+        return f"{m.group(1)}। {caption[:70]}".strip()
 
     def _chunk_long_text(self, doc: NormalizedDocument, unit: Unit, ctx: list[str]) -> list[Chunk]:
-        """Unstructured bodies (circulars, manuals, act appendices): paragraph packing with
-        overlap, tracking the most recent heading-like line as local context."""
+        """Unstructured bodies (circulars, manuals, act appendices).
+
+        Manuals embed whole acts, so their text carries its own hierarchy ("২৩। শাস্তিঃ …"). When
+        numbered provisions are recognisable the text is packed along those boundaries: a
+        provision is never cut mid-way unless it alone exceeds the limit, and each chunk is
+        labelled with the provision it starts in. Without recognisable provisions the text is
+        packed by paragraph with overlap, tracking the nearest heading-like line.
+        """
         role = unit.metadata.get("role")
         lines = [ln for ln in unit.text.split("\n") if ln.strip()]
         base = [*ctx, "অংশ: তফসিল/সংযুক্তি" if role == "appendix" else "অংশ: মূল পাঠ"]
         budget = self.cfg.max_tokens - self.tok("\n".join(base)) - 30  # room for a heading line
-        pieces = self.split_text("\n".join(lines), budget)
+        starts = [i for i, ln in enumerate(lines) if _PROVISION_RE.match(ln)]
+        if len(starts) >= _MIN_PROVISIONS:
+            pieces = self._provision_pieces(lines, starts, budget)
+        else:
+            pieces = [(p, None, []) for p in self.split_text("\n".join(lines), budget)]
         chunks: list[Chunk] = []
         heading: str | None = None
         cursor = 0
-        for i, piece in enumerate(pieces):
-            # Find the heading in effect at the start of this piece.
+        for i, (piece, title, provisions) in enumerate(pieces):
             first_line = piece.split("\n", 1)[0]
-            scan, found_heading = cursor, heading
-            while scan < len(lines) and lines[scan] != first_line:
-                if self._is_heading(lines[scan]):
-                    found_heading = lines[scan]
-                scan += 1
-            if scan < len(lines):  # not found (word-window split): keep previous position/heading
-                cursor, heading = scan, found_heading
-            piece_ctx = [*base, f"প্রসঙ্গ: {heading}"] if heading and heading != first_line else base
+            if title is None:
+                # Find the heading in effect at the start of this piece.
+                scan, found_heading = cursor, heading
+                while scan < len(lines) and lines[scan] != first_line:
+                    if self._is_heading(lines[scan]):
+                        found_heading = lines[scan]
+                    scan += 1
+                if scan < len(lines):  # not found (word-window split): keep previous position/heading
+                    cursor, heading = scan, found_heading
+                title = heading
+            piece_ctx = [*base, f"প্রসঙ্গ: {title}"] if title and title != first_line else base
             src_type = "schedule" if role == "appendix" else "ebook"
             ident = Unit(src_type, unit.source_id, doc.source_id if role == "appendix" else None, piece)
-            chunks.append(self._emit(doc, [], ident, piece_ctx, piece, {"part": i + 1, "role": role}))
+            meta: dict[str, Any] = {"part": i + 1, "role": role}
+            if provisions:
+                meta["provisions"] = provisions
+            chunks.append(self._emit(doc, [], ident, piece_ctx, piece, meta))
         return chunks
+
+    def _provision_pieces(self, lines: list[str], starts: list[int],
+                          budget: int) -> list[tuple[str, str | None, list[str]]]:
+        """Pack lines into (text, heading, provision numbers) along provision boundaries."""
+        bounds = [0, *starts] if starts[0] != 0 else list(starts)
+        bounds.append(len(lines))
+        blocks = [(lines[a:b], a) for a, b in zip(bounds, bounds[1:]) if a < b]
+        target = min(self.cfg.target_tokens, budget)
+        out: list[tuple[str, str | None, list[str]]] = []
+        cur: list[str] = []
+        cur_t = 0
+        cur_title: str | None = None
+        cur_nums: list[str] = []
+        last_heading: str | None = None
+
+        def flush() -> None:
+            nonlocal cur, cur_t, cur_title, cur_nums
+            if cur:
+                out.append(("\n".join(cur), cur_title, cur_nums))
+            cur, cur_t, cur_title, cur_nums = [], 0, None, []
+
+        for blk, _ in blocks:
+            m = _PROVISION_RE.match(blk[0])
+            title = self._provision_title(blk[0]) if m else None
+            for ln in blk:
+                if not m and self._is_heading(ln):
+                    last_heading = ln
+            text = "\n".join(blk)
+            t = self.tok(text)
+            if t > budget:  # one provision larger than a chunk: split it, keep its title on every part
+                flush()
+                for piece in self.split_text(text, budget):
+                    out.append((piece, title or last_heading, [m.group(1)] if m else []))
+                continue
+            if cur and cur_t + t > target:
+                flush()
+            if not cur:
+                cur_title = title or last_heading
+            cur.append(text)
+            cur_t += t
+            if m:
+                cur_nums.append(m.group(1))
+        flush()
+        return out
 
     # ------------------------------------------------------------------ Q&A / plain
     def _chunk_qna(self, doc: NormalizedDocument) -> list[Chunk]:

@@ -108,16 +108,40 @@ def parse_year(value: str | int | None) -> int | None:
     return year if 1700 <= year <= 2200 else None
 
 
+_SECTION_JUNK = "()[]।.:-৷ \u2010\u2011\u2013"
+
+
 def normalize_section_number(value: str | None) -> str | None:
-    """'১। ' → '1', '(২) ' → '2', '৫ক' → '5ক', '0' / '' → None."""
+    """'১। ' → '1', '(২) ' → '2', '৫ক' → '5ক', '৩৷' → '3', '9a' → '9A', '26[86' → '26'.
+    '0' / '' → None.
+
+    The upstream API writes the separator as danda, full stop, space or U+09F7 (৷); a Latin
+    suffix is case-folded to upper case so a query's "9a" meets the stored "9A"."""
     if not value:
         return None
-    v = bn_to_ascii_digits(clean_unicode(value)).strip()
-    v = v.strip("()[]।.:- ")
+    v = bn_to_ascii_digits(clean_unicode(value)).strip().strip(_SECTION_JUNK)
     v = re.sub(r"\s+", "", v)
+    # Footnote residue such as "26[86": keep the leading number.
+    v = re.sub(r"^(\d+[A-Za-zক-হ]{0,2})[\[\(].*$", r"\1", v)
+    v = "".join(ch.upper() if "a" <= ch <= "z" else ch for ch in v)
     if not v or v == "0":
         return None
     return v
+
+
+def lexical_coverage(terms: list[str], lexical_body: str) -> float:
+    """Fraction of query terms present in a normalised text (prefix terms ``x:*`` match as prefixes)."""
+    if not terms:
+        return 0.0
+    tokens = set(lexical_body.split())
+    hit = 0
+    for t in terms:
+        if t.endswith(":*"):
+            p = t[:-2]
+            hit += any(tok.startswith(p) for tok in tokens)
+        else:
+            hit += t in tokens
+    return hit / len(terms)
 
 
 # ---------------------------------------------------------------------------------------

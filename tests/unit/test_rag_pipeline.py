@@ -188,3 +188,13 @@ async def test_request_is_fitted_to_provider_token_limits():
     est_input = sum(len(m.content) for m in llm.messages) / 2.0
     assert est_input <= 3000
     assert llm.calls[0] <= 4000 - est_input + 1  # output budget capped to the total limit
+
+
+def test_focus_note_names_the_requested_provision():
+    from app.rag.context import focus_note
+    from app.retrieval.query import analyze_query
+
+    assert focus_note(analyze_query("নামজারি কী")) is None
+    note = focus_note(analyze_query("ভূমি আইন এর ধারা ৫ এর উপ-ধারা (৩)"))
+    assert "ধারা/বিধি ৫" in note and "উপ-ধারা ৩" in note and "subsection" in note
+    assert "দফা (খ)" in focus_note(analyze_query("ভূমি আইন এর ধারা ৫ এর দফা (খ)"))

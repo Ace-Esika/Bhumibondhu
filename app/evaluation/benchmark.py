@@ -47,8 +47,16 @@ def load_dataset(path: str | Path) -> list[dict[str, Any]]:
 
 
 def doc_keys(meta: dict[str, Any]) -> set[str]:
-    return {f"{meta.get('doc_source_type')}:{meta.get('doc_source_id')}",
+    """Every id a retrieved chunk can be credited with: its document, its own element, and the
+    whole ancestry it sits in (`section:<id>`, `subsection:<id>` ...). A chunk holding several
+    subsections (`covers`) counts for each of them, so "found subsection N" is measurable
+    however the provision happened to be split into chunks."""
+    keys = {f"{meta.get('doc_source_type')}:{meta.get('doc_source_id')}",
             f"{meta.get('source_type')}:{meta.get('source_id')}"}
+    cm = meta.get("chunk_metadata") or {}
+    keys |= {f"{u['type']}:{u['id']}" for u in cm.get("path") or [] if u.get("type") and u.get("id")}
+    keys |= {f"{meta.get('source_type')}:{cid}" for cid in cm.get("covers") or []}
+    return keys
 
 
 def source_keys(src: dict[str, Any]) -> set[str]:
@@ -91,7 +99,7 @@ async def run_benchmark(dataset_path: str, ks: list[int] | None = None, rerank: 
         docs, trace = await searcher.search(ex["question"], final_k=max(ks), rerank=rerank)
         latencies.append((time.perf_counter() - t0) * 1000)
         row: dict[str, Any] = {"id": ex["id"], "question": ex["question"], "tags": ex.get("tags", []),
-                               "retrieved": [sorted(doc_keys(d.metadata))[0] for d in docs[:max(ks)]]}
+                               "retrieved": [f"{d.metadata.get('source_type')}:{d.metadata.get('source_id')}" for d in docs[:max(ks)]]}
         gate_docs = docs[: settings.final_context_k]
         passes_gate, why = evidence_sufficient(gate_docs, settings, trace.reranked)
         row["evidence_gate"] = {"pass": passes_gate, "why": why}

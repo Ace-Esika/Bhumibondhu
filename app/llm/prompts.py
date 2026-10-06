@@ -83,6 +83,15 @@ DETAIL REQUEST — ব্যবহারকারী বিস্তারিত
 - উৎসে যা নেই তা যোগ করবেন না।
 """
 
+# Appended when the question names a specific provision ("<act> ধারা ৫ এর উপ-ধারা (৩)").
+FOCUS_NOTE = """
+
+TARGET PROVISION: the question refers to {target}. Sources whose "অবস্থান" matches it are the requested
+provision: answer from them first and quote the provision with its own numbering. Other sources may be
+neighbouring provisions; use them only as supporting context and never attribute their content to the requested
+one. If none of the sources contains the requested {missing}, say so plainly instead of answering from a
+different one."""
+
 # Appended for "all sections" requests when only part of the document fits in the context.
 COVERAGE_NOTE = """
 COVERAGE: উৎসে "{title}" দলিলের মোট {total}টি {label_gen} মধ্যে {included}টির পূর্ণ পাঠ দেওয়া হয়েছে ({covered})।

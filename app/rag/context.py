@@ -110,3 +110,21 @@ def coverage_note(cov: Coverage, used: list[Document]) -> str | None:
     return COVERAGE_NOTE.format(title=cov.title, total=ascii_to_bn_digits(str(cov.total)),
                                 included=ascii_to_bn_digits(str(len(nums))), covered=f"{cov.label} {covered}",
                                 label=cov.label, label_gen=label_gen)
+
+
+def focus_note(q: AnalyzedQuery) -> str | None:
+    """Prompt note for questions that name a provision, so the model answers from that exact
+    provision and admits it when the requested subsection / clause was not retrieved."""
+    from app.llm.prompts import FOCUS_NOTE
+
+    if not q.section_number:
+        return None
+    parts = [f"ধারা/বিধি {ascii_to_bn_digits(q.section_number)}"]
+    missing = "provision"
+    if q.subsection_number:
+        parts.append(f"উপ-ধারা {ascii_to_bn_digits(q.subsection_number)}")
+        missing = "subsection"
+    if q.clause:
+        parts.append(f"দফা ({q.clause})")
+        missing = "clause"
+    return FOCUS_NOTE.format(target=", ".join(parts), missing=missing)

@@ -37,7 +37,7 @@ from app.llm.prompts import (
 )
 from app.rag.citation import authority_label, build_source, extract_citations, section_label
 from app.rag.condense import condense, looks_dependent, render_turns
-from app.rag.context import Coverage, coverage_note, expand_document, expand_sections
+from app.rag.context import Coverage, coverage_note, expand_document, expand_sections, focus_note
 from app.rag.guardrails import (
     URL_RE,
     clean_user_message,
@@ -170,6 +170,8 @@ class RAGPipeline:
         for _ in range(6):
             context, used = build_context(docs, budget)
             instr = instructions
+            if note := focus_note(q):
+                instr += note
             if coverage is not None and (note := coverage_note(coverage, used)):
                 instr += note
             messages = ANSWER_PROMPT.format_messages(sources=context, question=q.text, instructions=instr,

@@ -44,6 +44,22 @@ def test_normalize_section_number():
     assert normalize_section_number(None) is None
 
 
+def test_normalize_section_number_upstream_quirks():
+    # U+09F7 is used by the upstream API as a separator ("৩৷"); it must not leak into the number.
+    assert normalize_section_number("৩৷") == "3"
+    assert normalize_section_number("১০৷ ") == "10"
+    assert normalize_section_number("9a") == "9A" == normalize_section_number("9A")
+    assert normalize_section_number("26[86") == "26"
+    assert normalize_section_number("১৪৫ঝ") == "145ঝ"
+
+
+def test_lexical_coverage_helper():
+    from app.core.text import lexical_coverage
+    assert lexical_coverage(["নামজারি:*", "ফি"], "নামজারির ফি") == 1.0
+    assert lexical_coverage(["নামজারি:*", "ফি"], "অন্য") == 0.0
+    assert lexical_coverage([], "x") == 0.0
+
+
 def test_tokenize_normalises_digits_and_zero_width():
     assert tokenize("ধারা ৫।") == ["ধারা", "5"]
     assert tokenize("নাম‌জারি") == ["নামজারি"]

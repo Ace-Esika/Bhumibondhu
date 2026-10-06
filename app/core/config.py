@@ -117,6 +117,8 @@ class Settings(BaseSettings):
     authority_boost: float = 0.02
     section_match_boost: float = 0.25  # boost when a query's "ধারা N" matches the chunk
     hnsw_ef_search: int = 80
+    # Overview / TOC / preamble chunks are multiplied by this unless the query is about the whole act.
+    overview_demotion: float = 0.6
     # Evidence thresholds. Below these the system refuses instead of answering.
     min_vector_similarity: float = 0.50  # calibrated: README §10
     min_rerank_score: float = 0.05

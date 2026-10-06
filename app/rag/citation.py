@@ -39,8 +39,11 @@ def section_label(meta: dict[str, Any]) -> str | None:
             head += f" — {meta['section_heading'].rstrip('।').strip()}"
         parts.append(head)
     cm = meta.get("chunk_metadata") or {}
-    if cm.get("subsection_number"):
-        parts.append(f"উপ-{label} {cm['subsection_number']}")
+    subs = cm.get("subsection_numbers") or ([cm["subsection_number"]] if cm.get("subsection_number") else [])
+    if len(subs) > 1:
+        parts.append(f"উপ-{label} {subs[0]}–{subs[-1]}")
+    elif subs:
+        parts.append(f"উপ-{label} {subs[0]}")
     if cm.get("schedule_number"):
         parts.append(f"তফসিল {cm['schedule_number']}")
     elif cm.get("clause_number"):

@@ -208,6 +208,16 @@ python -m app.cli import-index               # manual import into an empty DB (-
   - Every chunk carries a context header (`আইনের নাম`, `ধরন`, `সাল`, `ধারা: ৫ — শিরোনাম`,
     `উপ-ধারা`, `তফসিল`, the section lead-in). The header is embedded with the content.
   - Q&A pairs stay as one unit (`প্রশ্ন` + `উত্তর` + category + keyword).
+  - A chunk records **every** subsection it holds (`metadata.subsection_numbers`), and a chunk
+    that holds only some of a section's subsections says so in its header
+    (`উপ-ধারা: (১)–(৩)`), so a subsection number is searchable however the section was split.
+    Upstream stores both উপ-ধারা `(২)` and দফা `(ক)` as "subsections"; both are handled.
+  - **Manuals and long circulars** (no section tree) embed whole acts, so their text is packed
+    on numbered-provision boundaries (`২৩। শাস্তিঃ …`): a provision is split only when it alone
+    exceeds a chunk, and each chunk is labelled with the provision it starts in
+    (`metadata.provisions`). `section_number` stays empty there on purpose: one manual contains
+    several acts, so a number would produce false exact matches. Headings that are really
+    clauses, signatures or table rows are no longer used as chunk labels.
 * **pipeline.py** does incremental sync using `(source_type, source_id)` plus a content
   hash. Engagement counters are excluded from the hash, and `PIPELINE_VERSION` plus the
   chunking configuration are included in it.
@@ -234,9 +244,20 @@ python -m app.cli import-index               # manual import into an empty DB (-
   section heading and keywords get weight A, the body gets B.
 * **Fusion** is min-max linear fusion by default (`VECTOR_WEIGHT=0.7`/`LEXICAL_WEIGHT=0.3`,
   chosen by the benchmark in §10). Weighted RRF is also available (`FUSION_METHOD=rrf`).
-* **Exact provision lookup:** when a query names `ধারা/বিধি N` plus an act, chunks with that
-  section number from the matching act are fetched structurally and ranked first. After fusion, a small authority tie-breaker is applied, plus an
-  explicit-section boost (`ধারা ৫` in the query favours section 5).
+* **Exact provision lookup:** when a query names `ধারা/বিধি N` plus an act, the provision is
+  fetched structurally and ranked first. The query is parsed down to the subsection and clause
+  (`ধারা ৫ এর উপ-ধারা (৩)`, `ধারা ৫(২)`, `ধারা ৯ক দফা (খ)`). The act is chosen by how well its
+  **document title** covers the remaining query words; the year in the query is only a
+  tie-breaker (an act's title year and its `act_year` field disagree for some records, so a hard
+  year filter used to hide the right act). Every chunk of the provision comes back in document
+  order with the chunk holding the requested subsection or clause first
+  (`chunk.metadata.subsection_numbers`). If the title names no single act (more than two tie),
+  the lookup returns nothing and ordinary hybrid retrieval decides. An exact match also
+  satisfies the evidence gate. After fusion a small authority tie-breaker and an explicit-section
+  boost are applied, and each act's overview / table-of-contents / preamble chunk is demoted
+  (`OVERVIEW_DEMOTION`, 0.6) unless the question is about the act as a whole (সূচি, প্রস্তাবনা,
+  "কোন আইন", ...), because that chunk repeats the act's title and would otherwise win any query
+  that merely names the act.
 * **Reranker** (optional) scores the top `RERANKER_TOP_K` (20) with bge-reranker-v2-m3 and
   keeps `FINAL_CONTEXT_K` (5). If it fails, retrieval falls back to the fused order.
 * If query embedding fails, retrieval degrades to lexical-only.
@@ -353,6 +374,7 @@ The most important ones:
 | `EMBEDDING_MODEL` / `_DEVICE` / `_BATCH_SIZE` | `BAAI/bge-m3` / `cpu` / `4` | `auto` picks CUDA if present |
 | `RERANKER_ENABLED` | `false` | enable on GPU; CPU costs about 2 s per candidate |
 | `FUSION_METHOD`, `VECTOR_WEIGHT`, `LEXICAL_WEIGHT` | `linear`, 0.7, 0.3 | chosen by benchmark (§10) |
+| `OVERVIEW_DEMOTION` | 0.6 | score multiplier for act overview/TOC chunks unless the question is about the whole act |
 | `MIN_VECTOR_SIMILARITY` / `MIN_RERANK_SCORE` | 0.50 / 0.05 | evidence gate; calibrated in §10 |
 | `CHUNK_TARGET_TOKENS` / `_MAX_` / `_OVERLAP_` | 500 / 700 / 80 | changing these reprocesses on the next sync |
 | `SYNC_INTERVAL_HOURS` | 6 | worker schedule; state lives in `ingestion_runs` |
@@ -515,6 +537,7 @@ aborted a whole benchmark run (errors are now recorded per example).
   text. Long acts are answered as the full table of contents plus the provisions that fit,
   with the rest available by section number. The daily token quota (200k per model) is used
   up quickly by evaluation runs.
+* The API has no chapter (অধ্যায়/ভাগ) level, so "এই অধ্যায়ের অধীন …" cannot be resolved to a chapter.
 * Upstream data gaps are reproduced faithfully. For example, ধারা ৪ of the ভূমি অপরাধ
   প্রতিরোধ ও প্রতিকার আইন, ২০২৩ in the API skips দফা (চ).
 

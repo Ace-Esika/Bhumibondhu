@@ -136,3 +136,22 @@ async def test_detail_expansion_returns_whole_provisions_in_order(indexed, isett
     assert ordered[0].metadata["chunk_metadata"].get("role") == "overview"
     assert [d.metadata["chunk_index"] for d in ordered] == sorted(d.metadata["chunk_index"] for d in ordered)
     assert cov.total >= 1 and cov.label in ("ধারা", "বিধি", "অনুচ্ছেদ", "প্রবিধান")
+
+
+async def test_exact_provision_lookup_finds_subsection_and_ignores_year_mismatch(indexed, isettings, embedder):
+    """"<act> ধারা N দফা k" is answered structurally: the chunk holding that clause ranks first, and a
+    year in the query that is absent from the stored record never hides the act."""
+    s = _searcher(isettings, embedder, indexed)
+    # act 241, ধারা ৫ holds clauses (ক)(খ)(গ) in one chunk; the year 1999 matches neither title nor `year`
+    q = analyze_query("পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন আইন, ১৯৯৯ এর ধারা ৫ এর দফা (খ)")
+    assert (q.section_number, q.clause) == ("5", "খ")
+    docs, _ = await s.search(q, final_k=5)
+    top = docs[0].metadata
+    assert top["doc_source_id"] == "241" and top["section_number"] == "5" and top["exact_match"]
+    assert "(খ)" in top["chunk_metadata"]["subsection_numbers"]
+
+
+async def test_overview_chunk_does_not_outrank_the_named_provision(indexed, isettings, embedder):
+    s = _searcher(isettings, embedder, indexed)
+    docs, _ = await s.search("পার্বত্য চট্টগ্রাম ভূমি-বিরোধ নিষ্পত্তি কমিশন আইন এর ধারা ২ কী বলে", final_k=3)
+    assert (docs[0].metadata["chunk_metadata"] or {}).get("role") not in ("overview", "toc", "preamble")

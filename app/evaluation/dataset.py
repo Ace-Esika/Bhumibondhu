@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import random
+import re
 from pathlib import Path
 
 from sqlalchemy import select
@@ -49,6 +50,80 @@ async def build_self_retrieval_set(output: str, per_type: int = 40, seed: int = 
                 "id": f"self-heading-{r.source_id}",
                 "question": r.section_heading.rstrip("।").strip(),
                 "expected_source_ids": [f"ebook:{r.doc_id}"], "tags": ["self_section_heading_to_act"]})
+    Path(output).parent.mkdir(parents=True, exist_ok=True)
+    with open(output, "w", encoding="utf-8") as f:
+        for e in examples:
+            f.write(json.dumps(e, ensure_ascii=False) + "\n")
+    return len(examples)
+
+
+async def build_hierarchy_set(output: str, per_type: int = 40, seed: int = 13) -> int:
+    """Hierarchy-aware examples for the legal acts: every question names a position in the
+    act → section → subsection tree, and the expected id is that exact element.
+
+    - `h_section_by_number`   "<act> এর ধারা N"
+    - `h_subsection_by_number` "<act> এর ধারা N এর উপ-ধারা (k)"
+    - `h_section_by_heading`  "<act> - <heading> সম্পর্কে কী বলা আছে"
+    - `h_passage`             the opening words of a provision's own text (paraphrase-free)
+    """
+    import re
+
+    rng = random.Random(seed)
+    examples: list[dict] = []
+    async with get_sessionmaker()() as s:
+        rows = (await s.execute(
+            select(DocumentChunk.source_type, DocumentChunk.source_id, DocumentChunk.section_number,
+                   DocumentChunk.section_heading, DocumentChunk.doc_type, DocumentChunk.content,
+                   DocumentChunk.metadata_, Document.title)
+            .join(Document, Document.id == DocumentChunk.document_id)
+            .where(Document.source_type == "ebook", Document.is_active,
+                   DocumentChunk.source_type.in_(("section", "subsection")),
+                   DocumentChunk.section_number.is_not(None))
+            .order_by(DocumentChunk.document_id, DocumentChunk.chunk_index)
+        )).all()
+
+    def label(r) -> str:
+        return SECTION_LABELS.get(r.doc_type or "", "অনুচ্ছেদ")
+
+    def section_id(r) -> str | None:
+        return next((u["id"] for u in (r.metadata_ or {}).get("path", []) if u["type"] == "section"), None)
+
+    sections = {}
+    for r in rows:
+        sid = section_id(r)
+        if sid and sid not in sections and re.fullmatch(r"\d+", r.section_number or ""):
+            sections[sid] = r
+    pool = list(sections.items())
+    rng.shuffle(pool)
+    for sid, r in pool[:per_type]:
+        examples.append({"id": f"h-sec-{sid}", "tags": ["h_section_by_number"], "expected_source_ids": [f"section:{sid}"],
+                         "question": f"{r.title} এর {label(r)} {ascii_to_bn_digits(r.section_number)} এ কী বলা হয়েছে?"})
+    for sid, r in [p for p in pool[per_type:] if p[1].section_heading][:per_type]:
+        examples.append({"id": f"h-head-{sid}", "tags": ["h_section_by_heading"], "expected_source_ids": [f"section:{sid}"],
+                         "question": f"{r.title} - {r.section_heading.rstrip('।').strip()} সম্পর্কে কী বলা আছে"})
+    subs = []
+    for r in rows:
+        m = r.metadata_ or {}
+        nums, covers = m.get("subsection_numbers") or [], m.get("covers") or []
+        sid = section_id(r)
+        if r.source_type != "subsection" or not sid or not re.fullmatch(r"\d+", r.section_number or ""):
+            continue
+        if len(nums) == 1:
+            subs.append((r, nums[0], r.source_id, sid))
+        elif nums and len(nums) == len(covers):
+            subs.extend((r, n, cid, sid) for n, cid in zip(nums, covers))
+    rng.shuffle(subs)
+    for r, num, eid, sid in subs[:per_type]:
+        examples.append({"id": f"h-sub-{eid}", "tags": ["h_subsection_by_number"],
+                         "expected_source_ids": [f"subsection:{eid}"],
+                         "question": f"{r.title} এর {label(r)} {ascii_to_bn_digits(r.section_number)} এর "
+                                     f"উপ-{label(r)} {num.strip('()')}"})
+    passages = [r for r in rows if r.source_type == "section" and len(r.content.split()) >= 30]
+    rng.shuffle(passages)
+    for r in passages[:per_type]:
+        words = r.content.split()
+        examples.append({"id": f"h-pass-{r.source_id}", "tags": ["h_passage"],
+                         "expected_source_ids": [f"section:{r.source_id}"], "question": " ".join(words[:22])})
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     with open(output, "w", encoding="utf-8") as f:
         for e in examples:

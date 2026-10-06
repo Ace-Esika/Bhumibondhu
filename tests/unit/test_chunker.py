@@ -102,3 +102,57 @@ def test_long_preamble_never_pushes_the_table_of_contents_out(word_tokens):
     assert "মোট ৪০টি" in toc_text
     assert any(c.metadata.get("role") == "preamble" for c in chunks)
     assert "প্রস্তাবনার-শব্দ" not in toc_text
+
+
+def test_chunks_record_every_subsection_number(word_tokens):
+    subs = [Unit("subsection", f"s{i}", "100", " ".join(["শব্দ"] * 40) + f" শেষ{i}", number=f"({i})")
+            for i in range(1, 5)]
+    sec = Unit("section", "100", "9", "এই আইনে—", number="২।", heading="সংজ্ঞা", children=subs)
+    chunks = [c for c in _chunker(word_tokens).chunk(_act([sec])) if c.metadata.get("role") != "overview"]
+    seen = [n for c in chunks for n in c.metadata["subsection_numbers"]]
+    assert seen == ["(1)", "(2)", "(3)", "(4)"]
+    small = Unit("section", "101", "9", "", number="৩।", heading="ক", children=[
+        Unit("subsection", "t1", "101", "প্রথম", number="(১)"), Unit("subsection", "t2", "101", "দ্বিতীয়", number="(২)")])
+    (c,) = [c for c in _chunker(word_tokens).chunk(_act([small])) if c.metadata.get("role") != "overview"]
+    assert c.metadata["subsection_numbers"] == ["(১)", "(২)"]
+
+
+def _manual(provisions, filler=30):
+    lines = ["ভূমি আপীল বোর্ড আইন", *[f"{n}। শিরোনাম{n}ঃ " + " ".join([f"ক{n}_{i}" for i in range(filler)])
+                                       for n in "১২৩৪৫৬৭৮৯"[:provisions]]]
+    return NormalizedDocument(source_type="ebook", source_id="m", title="ম্যানুয়াল", doc_type="ম্যানুয়াল",
+                              units=[Unit("ebook_text", "m", None, "\n".join(lines), metadata={"role": "body"})])
+
+
+def test_manual_text_is_packed_on_provision_boundaries(word_tokens):
+    chunks = [c for c in _chunker(word_tokens).chunk(_manual(9)) if c.metadata.get("role") == "body"]
+    assert len(chunks) >= 3
+    for c in chunks:
+        # every provision that starts in a chunk is complete in it: each marker of a provision
+        # appears exactly once across all chunks
+        assert word_tokens(c.content) <= 90
+    for n in "১২৩৪৫৬৭৮৯":
+        assert sum(f"ক{n}_29" in c.content for c in chunks) == 1
+        owner = next(c for c in chunks if f"ক{n}_0" in c.content)
+        assert f"ক{n}_29" in owner.content  # not cut in half
+    assert chunks[0].metadata["provisions"][0] == "১"
+    for c in chunks:  # each chunk is labelled with the provision it starts in (or the heading before it)
+        first = c.content.split("\n", 1)[0]
+        if first[:2] in {f"{n}।" for n in "১২৩৪৫৬৭৮৯"}:
+            assert f"প্রসঙ্গ: {first[:2]} শিরোনাম{first[0]}" in c.context
+    assert all(c.section_number is None for c in chunks)  # manuals embed several acts: no false exact keys
+
+
+def test_oversized_provision_is_split_and_keeps_its_title(word_tokens):
+    chunks = [c for c in _chunker(word_tokens).chunk(_manual(4, filler=70)) if c.metadata.get("role") == "body"]
+    parts = [c for c in chunks if "ক২_" in c.content]
+    assert len(parts) >= 2
+    assert all("প্রসঙ্গ: ২। শিরোনাম২" in c.context for c in parts)
+
+
+def test_heading_heuristic_rejects_clauses_and_signatures():
+    h = Chunker._is_heading
+    assert h("ভূমি ব্যবস্থাপনা") and h("সংযোজনী 'খ'")
+    assert not h("(ঘ) বোর্ডের চেয়ারম্যান ও সদস্যগণের নিয়োগ এবং তাহাদের অপসারণ:")
+    assert not h("আদেশক্রমে") and not h("স্বা/- (মোঃ ফয়জুর রহমান)")
+    assert not h("২৩। শাস্তি") and not h("৩০ জুন, ২০২৬\"")

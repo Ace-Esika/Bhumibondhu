@@ -12,6 +12,22 @@ def test_section_extraction(q, section):
     assert analyze_query(q).section_number == section
 
 
+@pytest.mark.parametrize("q,section,sub,clause", [
+    ("ভূমি আইন, ২০২৩ এর ধারা ২ এর উপ-ধারা (৩)", "2", "3", None),
+    ("ধারা ৫(২) কী", "5", "2", None),
+    ("ধারা ৪ এর (২) উপধারা", "4", "2", None),
+    ("ধারা ২৬ এর ২ নং উপ-ধারা", "26", "2", None),
+    ("উপ-ধারা ২ কী বলে", None, "2", None),  # a sub-provision is never mistaken for a section
+    ("ধারা ৯ক দফা (খ)", "9ক", None, "খ"),
+    ("ধারা ৫ এর (ক) দফা", "5", None, "ক"),
+    ("section 9a subsection (b)", "9A", "B", None),
+    ("ধারা ৫ এ কী বলা আছে", "5", None, None),
+])
+def test_subsection_and_clause_extraction(q, section, sub, clause):
+    a = analyze_query(q)
+    assert (a.section_number, a.subsection_number, a.clause) == (section, sub, clause)
+
+
 def test_year_extraction():
     assert analyze_query("ভূমি আইন ২০২৩ এর ধারা ২").year == 2023
     assert analyze_query("নামজারি").year is None

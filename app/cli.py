@@ -8,7 +8,7 @@
     python -m app.cli counts                # document / chunk counts
     python -m app.cli snapshot DIR          # save raw API payloads for offline replay
     python -m app.cli evaluate DATASET.jsonl [--k 5 --k 10] [--no-rerank] [--output report.json]
-    python -m app.cli build-eval-set OUT.jsonl [--per-type N]
+    python -m app.cli build-eval-set OUT.jsonl [--per-type N] [--hierarchy]
     python -m app.cli groq-models           # list models available to GROQ_API_KEY
     python -m app.cli export-index [--output FILE]     # write the prebuilt index (seed)
     python -m app.cli import-index [FILE] [--force]    # load it into an empty database
@@ -109,9 +109,10 @@ async def cmd_evaluate(args) -> int:
 
 
 async def cmd_build_eval(args) -> int:
-    from app.evaluation.dataset import build_self_retrieval_set
+    from app.evaluation.dataset import build_hierarchy_set, build_self_retrieval_set
 
-    n = await build_self_retrieval_set(args.output, per_type=args.per_type, seed=args.seed)
+    build = build_hierarchy_set if args.hierarchy else build_self_retrieval_set
+    n = await build(args.output, per_type=args.per_type, seed=args.seed)
     print(f"wrote {n} examples → {args.output}")
     return 0
 
@@ -203,6 +204,8 @@ def main(argv: list[str] | None = None) -> int:
     bp.add_argument("output")
     bp.add_argument("--per-type", type=int, default=40)
     bp.add_argument("--seed", type=int, default=13)
+    bp.add_argument("--hierarchy", action="store_true",
+                    help="section / subsection / passage questions with element-level expected ids")
     xp = sub.add_parser("export-index", help="write a prebuilt index (seed) file")
     xp.add_argument("--output", default=get_settings().index_seed_path)
     ip = sub.add_parser("import-index", help="load a prebuilt index into an empty database")

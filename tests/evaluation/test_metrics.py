@@ -39,3 +39,14 @@ def test_load_json_array(tmp_path):
     p = tmp_path / "d.json"
     p.write_text(json.dumps([{"question": "q", "expected_source_ids": []}]))
     assert load_dataset(p)[0]["id"] == "ex0"
+
+
+def test_element_ancestry_counts_for_a_subsection_chunk():
+    doc = Document(page_content="x", metadata={
+        "doc_source_type": "ebook", "doc_source_id": "9", "source_type": "subsection", "source_id": "41",
+        "chunk_metadata": {"path": [{"type": "section", "id": "7", "number": "5"}, {"type": "subsection", "id": "41"}],
+                           "covers": ["41", "42"]}})
+    # found via the parent section, via a subsection that shares the chunk, and via its own id
+    for expected in ({"section:7"}, {"subsection:42"}, {"subsection:41"}):
+        assert retrieval_metrics([doc], expected, ks=[1])["hit@1"] == 1.0
+    assert retrieval_metrics([doc], {"subsection:99"}, ks=[1])["hit@1"] == 0.0
